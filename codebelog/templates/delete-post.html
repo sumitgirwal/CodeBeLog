@@ -1,0 +1,15 @@
+<div>
+    
+    <div class="blog">
+        <h3>{{ post.title }} </h3>
+        <b>{{ post.updated_at | timesince }}</b>
+        <p>{{ post.subtitle }}</p>
+        <p>{{ post.description }}</p>
+    </div>
+     
+    <form action="/delete/{{ post.id }}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+    </form>
+
+</div>

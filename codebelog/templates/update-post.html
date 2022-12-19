@@ -1,0 +1,9 @@
+<div>
+    
+    <form action="/update/{{ post.id }}" method="POST">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+        <input type="submit">
+    </form>
+</div>

@@ -1,1 +1,23 @@
-<h1>Hello World!</h1>
+<nav>
+    <ul>
+        <li>
+            <a href="/create">Create Post</a>
+        </li>
+    </ul>
+</nav>
+
+
+<div class="blog-list">
+
+    {% for post in posts %}
+    <div class="blog">
+        <h3><a href="view/{{ post.id }}">{{ post.title }} </a></h3>
+        <a href="update/{{ post.id }}">Edit</a>
+        <a href="delete/{{ post.id }}">Delete</a>
+        <b>{{ post.updated_at | timesince }}</b>
+        <p>{{ post.subtitle }}</p>
+        <p>{{ post.description }}</p>
+    </div>
+    {% endfor %}
+
+</div>
