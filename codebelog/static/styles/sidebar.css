@@ -1,0 +1,33 @@
+.sidebar {
+    width: 250px;
+    height: 100%;
+    background-color: white;
+    border: 1px solid rgba(198, 195, 195, 0.5);
+    padding: 6px 6px;
+     
+}
+
+.sidebar-title {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.sidebar-subtitle {
+    font-size: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.sidebar-block {
+    font-size: 14px;
+    padding: 10px;
+     
+}
+
+.sidebar-block p {
+    margin: 0;
+    padding: 10px;
+    border: 1px solid rgba(198, 195, 195, 0.5);
+     
+}

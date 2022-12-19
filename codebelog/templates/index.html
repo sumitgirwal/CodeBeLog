@@ -1,60 +1,31 @@
-<style>
-    body {
-        font-family: Arial;
-    }
-
-    ul {
-        display: flex;
-        list-style: none;
-    }
-    ul li {
-        padding: 10px 8px;
-    }
-</style>
-
-<nav>
-    <ul>
-        
-        {% if user.is_authenticated %}
-        <li>
-            <a href="/create">Create Post</a>
-        </li>
-            <li>
-                <a href="#">Hello,  {{ user.name | upper }}</a>
-            </li>
-            <li>
-                <a href="{% url 'logout' %}">Logout</a>
-            </li>
-
-        {% else %}
-            <li>
-                <a href="{% url 'login' %}">Login</a>
-            </li>
-            <li>
-                <a href="{% url 'signup' %}">Signup</a>
-            </li>
-        {% endif %}
-    </ul>
-</nav>
-
-
-<div class="blog-list">
-
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Home Page {% endblock %}
+{% block blog %}
+<section class="blog-section">
     {% for post in posts %}
     <div class="blog">
-
-        <h3><a href="view/{{ post.id }}">{{ post.title }} </a></h3>
-        <b>{{ post.user.name }}</b><br/>
-        
-        {% if request.user == post.user %}
-        <a href="update/{{ post.id }}">Edit</a>
-        <a href="delete/{{ post.id }}">Delete</a>
-        {% endif %}
-
-        <b>{{ post.updated_at | timesince }}</b>
-        <p>{{ post.subtitle }}</p>
-        <p>{{ post.description }}</p>
+        <div class="blog-left">
+            <img src="{% static 'images/logo/user1.jpg' %}" alt="User Logo">
+        </div>
+        <div class="blog-right">
+            <div class="blog-header">
+                <a href="#">{{ post.user.name }}</a>
+                <p>{{ post.updated_at | timesince }}</p>
+            </div>
+            <div class="blog-body">
+                <a href="#" class="blog-title">
+                    {{ post.title }}
+                </a>
+                <div class="blog-subtitle">
+                    {{ post.subtitle }}
+                </div>
+                <div class="blog-description">
+                    {{ post.description }}
+                </div>
+            </div>
+        </div>
     </div>
     {% endfor %}
-
-</div>
+</section>
+{% endblock %}
