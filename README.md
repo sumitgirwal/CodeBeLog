@@ -14,7 +14,8 @@ CodeBeLog webapplication for blogging.
 - User core `signup login logout` using name, email, password & confirm password
 
 #### Features
-Articles, Pages, Categories, Tags(Add, Delete, Edit), edc. Articles and pages support Markdown and highlighting.
+Articles, Pages, Categories, Tags(Add, Delete, Edit), etc. 
+Articles and pages support Markdown and highlighting.
 Articles support full-text search.
 Complete comment feature, include posting reply comment and email notification. Markdown supporting.
 Sidebar feature: new articles, most readings, tags, etc.

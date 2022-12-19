@@ -3,6 +3,11 @@ from django.http import HttpResponseRedirect
 from .models import Post
 from .forms import PostForm
 
+
+from django.contrib.auth.decorators import login_required
+
+
+
 # Home 
 def index(request):
     posts = Post.objects.all()
@@ -14,13 +19,14 @@ def index(request):
 
 
 # Post Creation
+@login_required(login_url='/account/login/')
 def createPost(request):
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, user=request.user)
         if form.is_valid():
             form.save()
             return redirect('/')
-    form = PostForm()
+    form = PostForm(user=request.user)
     context = {
         'form':form
     }
@@ -28,9 +34,10 @@ def createPost(request):
 
 
 # Delete a Post
+@login_required(login_url='/account/login/')
 def deletePost(request, pk):
     try:
-        post = Post.objects.get(id=pk)
+        post = Post.objects.get(id=pk, user=request.user)
     except:
         pass
 
@@ -45,19 +52,20 @@ def deletePost(request, pk):
 
 
 # Update a Post
+@login_required(login_url='/account/login/')
 def updatePost(request, pk):
     try:
-        post = Post.objects.get(id=pk)
+        post = Post.objects.get(id=pk, user=request.user)
     except:
         pass
 
     if request.method == 'POST':
-        form = PostForm(request.POST, instance=post )
+        form = PostForm(request.POST, instance=post , user=request.user)
         if form.is_valid():
             form.save()
             return redirect('/')
 
-    form = PostForm(instance=post)
+    form = PostForm(instance=post, user=request.user)
     context = {
         'form':form,
         'post':post

@@ -1,4 +1,8 @@
 <style>
+    body {
+        font-family: Arial;
+    }
+
     ul {
         display: flex;
         list-style: none;
@@ -10,11 +14,11 @@
 
 <nav>
     <ul>
+        
+        {% if user.is_authenticated %}
         <li>
             <a href="/create">Create Post</a>
         </li>
-        {% if user.is_authenticated %}
-        
             <li>
                 <a href="#">Hello,  {{ user.name | upper }}</a>
             </li>
@@ -30,12 +34,6 @@
                 <a href="{% url 'signup' %}">Signup</a>
             </li>
         {% endif %}
-        
-
-        
-        
-       
-
     </ul>
 </nav>
 
@@ -44,9 +42,15 @@
 
     {% for post in posts %}
     <div class="blog">
+
         <h3><a href="view/{{ post.id }}">{{ post.title }} </a></h3>
+        <b>{{ post.user.name }}</b><br/>
+        
+        {% if request.user == post.user %}
         <a href="update/{{ post.id }}">Edit</a>
         <a href="delete/{{ post.id }}">Delete</a>
+        {% endif %}
+
         <b>{{ post.updated_at | timesince }}</b>
         <p>{{ post.subtitle }}</p>
         <p>{{ post.description }}</p>
