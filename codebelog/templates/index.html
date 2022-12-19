@@ -13,18 +13,27 @@
         <li>
             <a href="/create">Create Post</a>
         </li>
-        <li>
-            <a href="#">Hello, username</a>
-        </li>
-        <li>
-            <a href="#">Login</a>
-        </li>
-        <li>
-            <a href="#">Signup</a>
-        </li>
-        <li>
-            <a href="#">Logout</a>
-        </li>
+        {% if user.is_authenticated %}
+        
+            <li>
+                <a href="#">Hello,  {{ user.name | upper }}</a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">Logout</a>
+            </li>
+
+        {% else %}
+            <li>
+                <a href="{% url 'login' %}">Login</a>
+            </li>
+            <li>
+                <a href="{% url 'signup' %}">Signup</a>
+            </li>
+        {% endif %}
+        
+
+        
+        
        
 
     </ul>

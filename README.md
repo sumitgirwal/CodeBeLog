@@ -9,9 +9,9 @@ CodeBeLog webapplication for blogging.
 
 
 #### Features Done
-- Basic setup and core Hello World! app
-- Blog Post CRUD Operations
-- 
+- Basic setup and core `Hello World!` app
+- Blog post `CRUD` operations
+- User core `signup login logout` using name, email, password & confirm password
 
 #### Features
 Articles, Pages, Categories, Tags(Add, Delete, Edit), edc. Articles and pages support Markdown and highlighting.
