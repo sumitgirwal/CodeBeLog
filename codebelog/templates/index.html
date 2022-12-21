@@ -6,15 +6,15 @@
     {% for post in posts %}
     <div class="blog">
         <div class="blog-left">
-            <img src="{% static 'images/logo/user1.jpg' %}" alt="User Logo">
+            <img src="{{ post.user.photo.url }}" alt="User Logo">
         </div>
         <div class="blog-right">
             <div class="blog-header">
-                <a href="#">{{ post.user.name }}</a>
+                <a href="#">@{{ post.user.name }}</a>
                 <p>{{ post.updated_at | timesince }}</p>
             </div>
             <div class="blog-body">
-                <a href="#" class="blog-title">
+                <a href="view/{{ post.id }}" class="blog-title">
                     {{ post.title }}
                 </a>
                 <div class="blog-subtitle">

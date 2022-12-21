@@ -46,6 +46,9 @@ class User(AbstractBaseUser):
     )
     
     name = models.CharField(max_length=255)
+    
+    photo = models.ImageField(default='user1.jpg')
+
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)

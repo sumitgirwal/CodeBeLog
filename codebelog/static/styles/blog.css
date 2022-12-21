@@ -43,6 +43,7 @@
 }
 
 .blog-header a {
+  font-size: 13px;
   color: #408cef;
   text-decoration: none;
   margin-right: 10px;
@@ -65,7 +66,7 @@
 }
 
 .blog-title {
-  color: rgb(38, 37, 37);
+  color: #408cef;
   text-decoration: none;
   font-size: 20px;
   font-weight: 500;

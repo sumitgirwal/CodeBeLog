@@ -7,15 +7,18 @@ from django.contrib.auth import authenticate, login, logout
 
 # User signup
 def userSignup(request):
+    msg = ''
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('login')
-
+        else:
+            msg = form.errors
     form = UserCreationForm()
     context = {
-        'form':form
+        'form':form,
+        'msg':msg
     }
     return render(request, 'signup.html', context)
 

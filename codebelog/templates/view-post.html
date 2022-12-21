@@ -1,12 +1,77 @@
-<div>
-    <a href="/"> < Back </a>
-    <div class="blog">
-        <h3>{{ post.title }} </h3>
-        <b>{{ post.updated_at | timesince }}</b>
-        <p>{{ post.subtitle }}</p>
-        <p>{{ post.description }}</p>
-    </div>
-     
-     
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Home Page {% endblock %}
+{% block blog %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
 
-</div>
+    h1 {
+        color: lightslategray;
+        font-size: 30px;
+    }
+
+    p {
+        margin: 10px 0;
+        font-size: 13px;
+        color: #807878;
+    }
+
+    .blog-details {
+        padding: 20px;
+        background-color: white;
+        border: 1px solid lightgray;
+        margin-right: 10px;
+    }
+
+    hr {
+        border: none;
+        border-bottom: 0.1px solid lightgray;
+        margin: 20px 0;
+
+
+    }
+
+    .blog-img {
+        height: 50px;
+        width: 50px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 25px;
+    }
+
+    .blog-description {
+        font-size: 14px;
+        color: black;
+        line-height: 28px;
+        word-wrap: break-word;
+        word-spacing: 40%;
+    }
+
+    .user-link {
+        color: lightskyblue;
+        text-decoration: none;
+    }
+</style>
+<section class="blog-section">
+    <div class="blog-details">
+        <h1> {{ post.title|title }} </h1>
+        <p> {{ post.updated_at | date }} </p>
+        <hr>
+        <h2>
+            {{ post.subtitle }}
+        </h2>
+        <div class="blog-description">
+            {{ post.description }}
+        </div>
+        <hr>
+
+        <h4>Contributed By: <a href="#" class="user-link">@{{ post.user.name }}</a></h4>
+        <img class="blog-img" src="{{ post.user.photo.url }}" alt="User Logo">
+
+
+    </div>
+</section>
+{% endblock %}
