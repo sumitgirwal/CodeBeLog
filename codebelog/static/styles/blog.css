@@ -1,8 +1,10 @@
+
 .blog-section {
   width: 740px;
   display: grid;
   gap: 20px;
 }
+
 
 .blog {
   /* background-color: lightcyan; */

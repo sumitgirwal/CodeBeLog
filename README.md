@@ -9,6 +9,22 @@ CodeBeLog webapplication for blogging.
 - Html
 - CSS
 
+#### Setup & Run
+
+```bash
+.\venv\Scripts\activate
+cd codebelog
+python manage.py runserver
+hit url: 
+```
+
+#### Install dummy database
+
+```bash
+python dummy.py
+
+```
+
 #### Features Done
 
 - Basic setup and core `Hello World!` app

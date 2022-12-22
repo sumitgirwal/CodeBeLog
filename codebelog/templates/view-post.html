@@ -67,11 +67,8 @@
             {{ post.description }}
         </div>
         <hr>
-
-        <h4>Contributed By: <a href="#" class="user-link">@{{ post.user.name }}</a></h4>
+        <h4>Contributed By: <a href="{% url 'view-user' %}{{ post.user.id }}" class="user-link">@{{ post.user.name }}</a></h4>
         <img class="blog-img" src="{{ post.user.photo.url }}" alt="User Logo">
-
-
     </div>
 </section>
 {% endblock %}

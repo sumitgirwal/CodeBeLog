@@ -2,6 +2,34 @@
 {% load static %}
 {% block title %} Home Page {% endblock %}
 {% block blog %}
+
+<style>
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+}
+ 
+
+.pagination .active {
+    color: lightskyblue;
+}
+
+.pagination .disabled {
+    color: rgb(17, 24, 29);
+}
+
+.pagination li a {
+    color: black;
+    font-size: 16px;
+    padding: 8px 10px;
+
+}
+</style>
 <section class="blog-section">
     {% for post in posts %}
     <div class="blog">
@@ -21,11 +49,40 @@
                     {{ post.subtitle }}
                 </div>
                 <div class="blog-description">
-                    {{ post.description }}
+                    {{ post.description | truncatechars:100 }}
                 </div>
             </div>
         </div>
     </div>
     {% endfor %}
+
+    {% if posts.has_other_pages %}
+    <ul class="pagination">
+        {% if posts.has_previous %}
+            <li><a href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+
+        {% for i in posts.paginator.page_range %}
+            {% if posts.number == i %}
+                <li class="active">
+                    <span>{{ i }} 
+                        <!-- <span class="sr-only">(current)</span> -->
+                    </span>
+                </li>
+            {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if posts.has_next %}
+            <li><a href="?page={{ posts.next_page_number }}">&raquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+
 </section>
 {% endblock %}

@@ -4,6 +4,7 @@ from .models import User
 from .forms import UserCreationForm
 
 from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import get_object_or_404
 
 # User signup
 def userSignup(request):
@@ -44,3 +45,14 @@ def userLogin(request):
 def userLogout(request):
     logout(request)
     return redirect('/')
+
+
+
+# User account view
+def viewUser(request, pk):
+     
+    user = get_object_or_404(User, pk=1)
+    context = {
+        'user': user
+    }
+    return render(request, 'user-profile.html', context)
