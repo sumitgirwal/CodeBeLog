@@ -2,7 +2,6 @@ from django.db import models
 
 from account.models import User
 
-
 class Post(models.Model):
     title = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=255)
@@ -10,6 +9,8 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    view = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ["-id"]

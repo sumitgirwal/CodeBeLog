@@ -11,14 +11,12 @@ from django.db.models import Q
 # Home 
 def index(request):
     search = request.GET.get('search','')
-    print(search)
     posts = None
     if search != '':
         posts = Post.objects.filter(
             Q(title__icontains=search) |
             Q(subtitle__icontains=search) 
             )
-        print(posts)
     else:
         posts = Post.objects.all()
 
@@ -96,7 +94,8 @@ def updatePost(request, pk):
 def viewPost(request, pk):
     try:
         post = Post.objects.get(id=pk)
-      
+        post.view += 1
+        post.save()
         
     except:
         pass

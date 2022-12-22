@@ -32,8 +32,9 @@
 </style>
 <section class="blog-section">
     {% if posts|length == 0 %}
-    <h1>Sorry, No artices found!!!</h1>
+        <h1>Sorry, No artices found!!!</h1>
     {% endif %}
+    
     {% for post in posts %}
     <div class="blog">
         <div class="blog-left">
@@ -41,8 +42,9 @@
         </div>
         <div class="blog-right">
             <div class="blog-header">
-                <a href="#">@{{ post.user.name }}</a>
-                <p>{{ post.updated_at | timesince }}</p>
+                <a href="#">@{{ post.user.name }} </a>
+                <p>{{ post.created_at | timesince }} - {{ post.view }}</p>
+                 
             </div>
             <div class="blog-body">
                 <a href="view/{{ post.id }}" class="blog-title">
