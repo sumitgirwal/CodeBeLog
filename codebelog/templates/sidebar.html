@@ -1,3 +1,5 @@
+{% load blog_tags %}
+{% render_recent_blogposts %}
 <style>
     .search-form {
         padding: 10px;
@@ -27,6 +29,8 @@
     }
 </style>
 <section class="sidebar">
+   
+
     <form class="search-form" action="/" method="GET">
         <input type="text" name="search" placeholder="Search...">
         <input type="submit" value="Search">

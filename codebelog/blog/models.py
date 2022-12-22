@@ -1,16 +1,32 @@
 from django.db import models
-
 from account.models import User
 
+STATUS = (
+    (0, "Public"),
+    (1, "Private")
+)
+
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+    def __str__(self):
+        return str(self.id)+' '+self.name
+
+
 class Post(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, unique=True)
     subtitle = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
     view = models.PositiveIntegerField(default=0)
+    
+    slug = models.SlugField(max_length=255, unique=True)
+    status = models.IntegerField(choices=STATUS, default=1)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    category = models.ManyToManyField(Category)
 
     class Meta:
         ordering = ["-id"]

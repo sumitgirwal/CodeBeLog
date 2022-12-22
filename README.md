@@ -1,16 +1,13 @@
 # CodeBeLog
-
 CodeBeLog webapplication for blogging.
 
 #### Built with
-
 - Python
 - Django
 - Html
 - CSS
 
 #### Setup & Run
-
 ```bash
 .\venv\Scripts\activate
 cd codebelog
@@ -19,14 +16,13 @@ hit url:
 ```
 
 #### Install dummy database
-
 ```bash
-python dummy.py
+python manage.py makemigrations
+python manage.py migrate
 
 ```
 
 #### Features Done
-
 - Basic setup and core `Hello World!` app
 - Blog post `CRUD` operations
 - User core `signup login logout` using name, email, password & confirm password
@@ -34,9 +30,10 @@ python dummy.py
 - User Profile View
 - Pagination
 - Search articles by title or subtitle
+- Blog view count
+
 
 #### Features
-
 Articles, Pages, Categories, Tags(Add, Delete, Edit), etc.
 Articles and pages support Markdown and highlighting.
 Articles support full-text search.

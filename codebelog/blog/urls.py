@@ -7,4 +7,6 @@ urlpatterns = [
     path('create/', views.createPost , name='create'),
     path('update/<int:pk>', views.updatePost , name='update'),
     path('delete/<int:pk>', views.deletePost , name='delete'),
+
+    path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
 ]

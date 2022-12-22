@@ -1,12 +1,23 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from .models import Post
+from .models import Post, Category
 from .forms import PostForm
 
-
+from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+
+
+from django import template
+register = template.Library()
+
+@register.inclusion_tag('sidebar.html')
+def get_category_list():
+    data = {
+        'cats': Category.objects.all()
+    } 
+    return data
 
 # Home 
 def index(request):
@@ -105,3 +116,7 @@ def viewPost(request, pk):
     }
 
     return render(request, 'view-post.html', context)
+
+class PostDetail(generic.DetailView):
+    model = Post
+    template_name = 'view-post.html'

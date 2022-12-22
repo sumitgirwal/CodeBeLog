@@ -34,12 +34,13 @@
     {% if posts|length == 0 %}
         <h1>Sorry, No artices found!!!</h1>
     {% endif %}
-    
+
     {% for post in posts %}
     <div class="blog">
         <div class="blog-left">
             <img src="{{ post.user.photo.url }}" alt="User Logo">
         </div>
+        
         <div class="blog-right">
             <div class="blog-header">
                 <a href="#">@{{ post.user.name }} </a>
@@ -48,6 +49,9 @@
             </div>
             <div class="blog-body">
                 <a href="view/{{ post.id }}" class="blog-title">
+                    {{ post.title }}
+                </a>
+                <a href="{% url 'post_detail' post.slug  %}" class="blog-title">
                     {{ post.title }}
                 </a>
                 <div class="blog-subtitle">
