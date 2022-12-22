@@ -1,4 +1,36 @@
+<style>
+    .search-form {
+        padding: 10px;
+        width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    .search-form input[type=text] {
+        padding: 5px;
+        border: none;
+        border: 1px solid lightgray;
+    }
+
+    .search-form input[type=submit] {
+        padding: 5px;
+        border: none;
+        background-color: black;
+        border: 1px solid black;
+        color: white;
+        margin-left: -4px;
+        transition: all 0.25s ease;
+        cursor: pointer;
+    }
+
+    .search-form input[type=submit]:hover {
+        opacity: 0.8;
+    }
+</style>
 <section class="sidebar">
+    <form class="search-form" action="/" method="GET">
+        <input type="text" name="search" placeholder="Search...">
+        <input type="submit" value="Search">
+    </form>
     <div class="sidebar-title">Our Sidebar</div>
     <div class="sidebar-subtitle">You can put any information here you'd like.</div>
     <div class="sidebar-block">

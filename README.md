@@ -31,6 +31,9 @@ python dummy.py
 - Blog post `CRUD` operations
 - User core `signup login logout` using name, email, password & confirm password
 - Post Created by user
+- User Profile View
+- Pagination
+- Search articles by title or subtitle
 
 #### Features
 

@@ -6,14 +6,24 @@ from .forms import PostForm
 
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from django.db.models import Q
 
 # Home 
 def index(request):
-    posts = Post.objects.all()
+    search = request.GET.get('search','')
+    print(search)
+    posts = None
+    if search != '':
+        posts = Post.objects.filter(
+            Q(title__icontains=search) |
+            Q(subtitle__icontains=search) 
+            )
+        print(posts)
+    else:
+        posts = Post.objects.all()
+
     page = request.GET.get('page', 1)
     paginator = Paginator(posts, 5)
-
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
