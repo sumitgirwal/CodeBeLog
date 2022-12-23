@@ -33,7 +33,7 @@ python manage.py migrate
 - Blog view count
 - Login signup page error and success messages flash
 - Search by category 
-
+- User dashboard 
 
 
 #### Features

@@ -1,0 +1,47 @@
+.profile-section {
+    border: 1px solid lightgray;
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 5px;
+    width: 700px;
+}
+
+.profile {
+    display: flex;
+    width: 100%;
+    gap:20px
+}
+
+.profile img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50px;
+}
+
+.profile-name {
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.profile-email {
+    font-size: 20px;
+    
+}
+.profile-stats {
+    margin: 20px 0;
+}
+
+.stats-btn {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 10px;
+    color: rgb(88, 135, 151);
+    border: none;
+    border-radius: 5px;
+    border: 1px solid lightblue;
+    background-color: white;
+    margin: 
+}

@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404
 
-from .models import User
+from account.models import User
+from blog.models import Post, Category
 from .forms import UserCreationForm
 
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+
 
 # User signup
 def userSignup(request):
@@ -42,6 +45,7 @@ def userLogin(request):
 
 
 # User Login
+@login_required
 def userLogout(request):
     logout(request)
     return redirect('/')
@@ -49,10 +53,37 @@ def userLogout(request):
 
 
 # User account view
-def viewUser(request, pk):
-     
+@login_required
+def viewUser(request, pk):     
     user = get_object_or_404(User, pk=1)
     context = {
         'user': user
     }
     return render(request, 'user-profile.html', context)
+
+
+
+@login_required(login_url='/account/login/')
+def dashboard(request):
+    user = request.user 
+    post_count = Post.objects.filter(user=user).count() 
+    context = {
+        'user':user,
+        'post_count':post_count
+    }
+    return render(request, 'dashboard.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
