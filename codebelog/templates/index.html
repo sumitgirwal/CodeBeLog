@@ -1,57 +1,33 @@
 {% extends 'base.html' %}
-{% load static %}
-{% block title %} Home Page {% endblock %}
-{% block blog %}
 
-<style>
-.pagination {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid lightgray;
-}
- 
+{% block page_title %} Home Page {% endblock %}
 
-.pagination .active {
-    color: lightskyblue;
-}
+{% load blog_tags %}
+{% render_category %}
 
-.pagination .disabled {
-    color: rgb(17, 24, 29);
-}
+<!-- left page -->
+{% block left_page %}
 
-.pagination li a {
-    color: black;
-    font-size: 16px;
-    padding: 8px 10px;
-
-}
-</style>
+<!-- Blog -->
 <section class="blog-section">
+
+    <!-- Posts not found -->
     {% if posts|length == 0 %}
-        <h1>Sorry, No artices found!!!</h1>
+        <div class="not-found">Sorry, No articles found!</div>
     {% endif %}
 
+
+    <!-- Show posts -->
     {% for post in posts %}
-    <div class="blog">
-        <div class="blog-left">
-            <img src="{{ post.user.photo.url }}" alt="User Logo">
-        </div>
-        
+    <div class="blog make-border">
         <div class="blog-right">
             <div class="blog-header">
                 <a href="#">@{{ post.user.name }} </a>
-                <p>{{ post.created_at | timesince }} - {{ post.view }}</p>
-                 
+                <p>{{ post.created_at | timesince }}</p>
             </div>
+            <hr>
             <div class="blog-body">
-                <a href="view/{{ post.id }}" class="blog-title">
-                    {{ post.title }}
-                </a>
-                <a href="{% url 'post_detail' post.slug  %}" class="blog-title">
+                <a href="{{ post.slug }}" class="blog-title">
                     {{ post.title }}
                 </a>
                 <div class="blog-subtitle">
@@ -65,6 +41,8 @@
     </div>
     {% endfor %}
 
+
+    <!-- Pagination -->
     {% if posts.has_other_pages %}
     <ul class="pagination">
         {% if posts.has_previous %}
@@ -92,6 +70,30 @@
         {% endif %}
     </ul>
     {% endif %}
+
+</section>
+{% endblock %}
+
+
+<!-- right page -->
+{% block right_page %}
+<section class="sidebar">
+     
+    <!-- search -->
+    <form class="search-form" action="/" method="GET">
+        <input type="text" name="search" placeholder="Search...">
+        <input type="submit" value="Search">
+    </form>
+
+    <!-- sidebar  -->
+    <div class="sidebar-title">
+        Categories
+    </div>
+    <div class="sidebar-block">
+        {% for cat in cats %}
+            <a href="#">{{ cat.name }}</a>
+        {% endfor %}
+    </div>
 
 </section>
 {% endblock %}

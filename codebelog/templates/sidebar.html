@@ -1,34 +1,6 @@
-{% load blog_tags %}
-{% render_recent_blogposts %}
-<style>
-    .search-form {
-        padding: 10px;
-        width: 100%;
-        margin-bottom: 1.5rem;
-    }
-
-    .search-form input[type=text] {
-        padding: 5px;
-        border: none;
-        border: 1px solid lightgray;
-    }
-
-    .search-form input[type=submit] {
-        padding: 5px;
-        border: none;
-        background-color: black;
-        border: 1px solid black;
-        color: white;
-        margin-left: -4px;
-        transition: all 0.25s ease;
-        cursor: pointer;
-    }
-
-    .search-form input[type=submit]:hover {
-        opacity: 0.8;
-    }
-</style>
-<section class="sidebar">
+<!-- {% load blog_tags %}
+{% render_recent_blogposts %} -->
+<!-- <section class="sidebar">
    
 
     <form class="search-form" action="/" method="GET">
@@ -43,4 +15,28 @@
         <p>Calendars</p>
         <p>etc</p>
     </div>
+</section> -->
+
+<section class="sidebar">
+     
+    <!-- search -->
+    <form class="search-form" action="/" method="GET">
+        <input type="text" name="search" placeholder="Search...">
+        <input type="submit" value="Search">
+    </form>
+
+    <!-- sidebar  -->
+    <div class="sidebar-title">
+        {% block sidebar_title %}{% endblock %}
+    </div>
+    <div class="sidebar-block">
+        {% block sidebar_link %}{% endblock %}
+    </div>
+
 </section>
+
+<!-- {% block sidebar_title %} Categories {% endblock %}
+{% block sidebar_link %}
+    <a href="#">Programming</a>
+    <a href="#">Python</a>
+{% endblock %} -->

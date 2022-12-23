@@ -27,9 +27,9 @@ def index(request):
         posts = Post.objects.filter(
             Q(title__icontains=search) |
             Q(subtitle__icontains=search) 
-            )
+            ).order_by('-created_at')
     else:
-        posts = Post.objects.all()
+        posts = Post.objects.all().order_by('-created_at')
 
     page = request.GET.get('page', 1)
     paginator = Paginator(posts, 5)
@@ -41,7 +41,8 @@ def index(request):
         posts = paginator.page(paginator.num_pages)
 
     context = {
-        'posts':posts
+        'posts':posts,
+        'cats':Category.objects.all()
     }
     return render(request, 'index.html', context)
 
@@ -107,7 +108,6 @@ def viewPost(request, pk):
         post = Post.objects.get(id=pk)
         post.view += 1
         post.save()
-        
     except:
         pass
     context = {

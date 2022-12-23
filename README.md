@@ -48,6 +48,5 @@ Website exception email notification. When there is an unhandle exception, syste
 Wechat official account feature integrated. Now, you can use wechat official account to manage your VPS.
 
 #### Resources
-
 - [Core Template](https://github.com/sumitgirwal/CodeBeLog-Template)
 - [Django Docs](https://docs.djangoproject.com/en/4.1/intro/tutorial01/)

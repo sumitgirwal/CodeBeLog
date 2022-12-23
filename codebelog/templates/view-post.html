@@ -1,75 +1,57 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Home Page {% endblock %}
-{% block blog %}
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-    }
+{% load blog_tags %}
+{% block page_title %}  Post View {% endblock %}
 
-    h1 {
-        color: lightslategray;
-        font-size: 30px;
-    }
-
-    p {
-        margin: 10px 0;
-        font-size: 13px;
-        color: #807878;
-    }
-
-    .blog-details {
-        padding: 20px;
-        background-color: white;
-        border: 1px solid lightgray;
-        margin-right: 10px;
-    }
-
-    hr {
-        border: none;
-        border-bottom: 0.1px solid lightgray;
-        margin: 20px 0;
-
-
-    }
-
-    .blog-img {
-        height: 50px;
-        width: 50px;
-        object-fit: cover;
-        object-position: center;
-        border-radius: 25px;
-    }
-
-    .blog-description {
-        font-size: 14px;
-        color: black;
-        line-height: 28px;
-        word-wrap: break-word;
-        word-spacing: 40%;
-    }
-
-    .user-link {
-        color: lightskyblue;
-        text-decoration: none;
-    }
-</style>
-<section class="blog-section">
-    <div class="blog-details">
-        <h1> {{ post.title|title }} </h1>
-        <p> {{ post.updated_at | date }} </p>
-        <p>Views: {{ post.view }}</p>
-        <hr>
-        <h2>
-            {{ post.subtitle }}
-        </h2>
-        <div class="blog-description">
-            {{ post.description }}
-        </div>
-        <hr>
-        <h4>Contributed By: <a href="#" class="user-link">@{{ post.user.name }}</a></h4>
-        <img class="blog-img" src="{{ post.user.photo.url }}" alt="User Logo">
+<!-- left page -->
+{% block left_page %}
+<section class="blog-view">
+    <div class="blog-view-header">
+        <h1 class="blog-header-title"> {{ post.title|title }} </h1>
+        <p> {{ post.updated_at | date }} | Views: {{ post.view }}</p>
     </div>
+    <hr>
+    <div class="blog-view-body">
+        <div class="blog-subtitle">{{ post.subtitle }}</div>
+        <div class="blog-description"> {{ post.description |  linebreaks  }} </div>
+    </div>
+    <hr>
+    <div class="blog-view-footer">
+        <img class="blog-img" src="{{ post.user.photo.url }}" alt="User Logo">
+        <p> Contributed By: <a href="#" class="make-link">@{{ post.user.name }}</a> </p>
+    </div>
+</section>
+{% endblock %}
+
+
+<!-- right page -->
+{% block right_page %}
+<section class="sidebar">
+    
+    <!-- search -->
+    <form class="search-form" action="/" method="GET">
+        <input type="text" name="search" placeholder="Search...">
+        <input type="submit" value="Search">
+    </form>
+
+    <!-- sidebar  -->
+    <div class="sidebar-title">
+        Categories  {% breadcrumb_schema %} 
+    </div>
+    <div class="sidebar-block">
+        {% get_categories %}
+
+        
+# my_template.html
+{% for category in categories %}
+     {{ category.name }}
+{% endfor %}
+
+
+        {% for cat in cats %}
+            <a href="#">{{ cat.name }}</a>
+        {% endfor %}
+    </div>
+
 </section>
 {% endblock %}

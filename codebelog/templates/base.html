@@ -1,28 +1,35 @@
 {% load static %}
+ 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeBeLog - {% block title %}{% endblock %}</title>
+    <title>CodeBeLog - {% block page_title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'styles/general.css' %}">
     <link rel="stylesheet" href="{% static 'styles/blog.css' %}">
     <link rel="stylesheet" href="{% static 'styles/sidebar.css' %}">
     <link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
 </head>
-
 <body>
 
+    <!-- Navbar -->
     {% include 'navbar.html' %}
-    <main>
-        {% block blog %}
-        {% endblock %}
+
+    <!-- Main Page -->
+    <main class="container flex">
+        <!-- Left Page -->
+        <section class="left-page">
+            {% block left_page %}
+            {% endblock %}
+        </section>
         
-        {% include 'sidebar.html' %}
+        <!-- Right Page -->
+        <section class="right-page make-border">
+            {% block right_page %}{% endblock %}
+        </section>
     </main>
 
 </body>
-
 </html>
