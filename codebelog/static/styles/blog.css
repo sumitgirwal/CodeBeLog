@@ -79,28 +79,33 @@
 
 /* pagination */
 .pagination {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid lightgray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  border-radius: 6px;
+  border: 1px solid lightgray;
+  background-color: white;
+  padding: 10px 8px;
 }
  
 
 .pagination .active {
-    color: lightskyblue;
+  color: rgb(17, 24, 29);
 }
 
 .pagination .disabled {
     color: rgb(17, 24, 29);
 }
 
-.pagination li a {
+.pagination li {
     color: black;
     font-size: 16px;
     padding: 8px 10px;
+}
+
+.pagination li a {
+  color: #408cef;
 }
  
 
