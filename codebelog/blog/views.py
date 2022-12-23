@@ -25,11 +25,15 @@ def index(request):
     posts = None
     if search != '':
         posts = Post.objects.filter(
-            Q(title__icontains=search) |
-            Q(subtitle__icontains=search) 
+            Q(status=0) &
+            (
+                Q(title__icontains=search) |
+                Q(subtitle__icontains=search) |
+                Q(category__name__icontains=search) 
+            )
             ).order_by('-created_at')
     else:
-        posts = Post.objects.all().order_by('-created_at')
+        posts = Post.objects.filter(status=0).order_by('-created_at')
 
     page = request.GET.get('page', 1)
     paginator = Paginator(posts, 5)

@@ -28,11 +28,11 @@
             <hr>
             <div class="blog-body">
                 <a href="{{ post.slug }}" class="blog-title">
-                    {{ post.title }}
+                    {{ post.title | title }}
                 </a>
                 <div class="blog-subtitle">
-                    {{ post.subtitle }}
-                </div>
+                    {{ post.subtitle | capfirst }}
+                </div> 
                 <div class="blog-description">
                     {{ post.description | truncatechars:100 }}
                 </div>
@@ -91,7 +91,7 @@
     </div>
     <div class="sidebar-block">
         {% for cat in cats %}
-            <a href="#">{{ cat.name }}</a>
+            <a href="?search={{cat.name}}">{{ cat.name }}</a>
         {% endfor %}
     </div>
 

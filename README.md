@@ -31,6 +31,9 @@ python manage.py migrate
 - Pagination
 - Search articles by title or subtitle
 - Blog view count
+- Login signup page error and success messages flash
+- Search by category 
+
 
 
 #### Features

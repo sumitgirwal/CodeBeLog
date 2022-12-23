@@ -36,20 +36,10 @@
 
     <!-- sidebar  -->
     <div class="sidebar-title">
-        Categories  {% breadcrumb_schema %} 
     </div>
     <div class="sidebar-block">
-        {% get_categories %}
-
-        
-# my_template.html
-{% for category in categories %}
-     {{ category.name }}
-{% endfor %}
-
-
-        {% for cat in cats %}
-            <a href="#">{{ cat.name }}</a>
+         {% for cat in post.category.all %}
+         <a href="/?search={{cat.name}}">{{ cat.name }}</a>
         {% endfor %}
     </div>
 
