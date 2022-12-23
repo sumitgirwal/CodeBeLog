@@ -13,7 +13,7 @@ def userSignup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
+            return render(request, 'login.html', {'msg':'Successfully Signup 😊', 'status':'success'})
         else:
             msg = form.errors
     form = UserCreationForm()

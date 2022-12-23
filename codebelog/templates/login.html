@@ -1,95 +1,38 @@
-<style>
-    *,
-    *::before,
-    *::after {
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeBeLog - Login </title>
+    <link rel="stylesheet" href="{% static 'styles/login-signup.css' %}">
+</head>
+<body>
 
-        box-sizing: border-box;
-        word-wrap: break-word;
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Ubuntu, sans-serif;
-    }
+    <div>
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-title">Log in to your account</div>
+            {% if status == 'success' %}
+                <div class="success-msg">{{ msg }}</div> 
+            {% else %}
+                <div class="error-msg">{{ msg }}</div> 
+            {% endif %}
+            <label>Email</label>
+            <input type="email" name="email">
+            <label>Password</label>
+            <input type="password" name="password">
+            <div class="form-signed"><input type="checkbox"> &nbsp; Stay signed in for a week </div>
+            <div class="formLink">
+                <a class="form-link" href="{% url 'signup' %}">Don't have an account ?</a> 
+                <a class="form-link" href="#">Forgot your password ?</a>
+            </div>
+            <p></p>
+            <input type="submit" value="Login">
+        </form>
+    </div>
 
-    body {
-        font-family: Arial;
-        background-color: lightcyan;
-    }
+</body>
+</html>
 
-    .form-title {
-        font-size: 20px;
-        margin-bottom: 20px;
-    }
-
-    form {
-        max-width: 400px;
-        background-color: white;
-        padding: 20px 20px;
-        margin: 0 auto;
-        margin-top: 5rem;
-
-    }
-
-    label {
-        font-size: 14px;
-    }
-
-    input[type=email],
-    input[type=password] {
-        display: block;
-        margin: 10px 0;
-        font-size: 14px;
-        width: 100%;
-        padding: 10px;
-        border-color: lightgray;
-        border-radius: 3px;
-        border-style: solid;
-        border-width: 0.2px;
-    }
-
-    .form-signed {
-        display: flex;
-        justify-content: start;
-        align-items: center;
-        font-size: 14px;
-        margin: 10px 0;
-    }
-
-    input[type=submit] {
-        padding: 10px 10px;
-        width: 100%;
-        font-size: 14px;
-        background-color: rgb(84, 105, 212);
-        border: none;
-        color: white;
-        cursor: pointer;
-        transition: opacity 0.125s;
-    }
-
-    input[type=submit]:hover {
-        opacity: 0.8;
-    }
-
-    input[type=email]:focus-visible,
-    input[type=password]:focus-visible {
-        border: none;
-    }
-
-    .form-link {
-        text-decoration: none;
-        color: rgb(84, 105, 212);
-        font-size: 14px;
-    }
-</style>
-
-<div>
-    <form action="{% url 'login' %}" method="POST">
-        {% csrf_token %}
-        <div class="form-title">Log in to your account</div>
-        <label>Email</label>
-        <input type="email" name="email">
-        <label>Password</label>
-        <input type="password" name="password">
-        <div class="form-signed"><input type="checkbox">Stay signed in for a week </div>
-        <p><a class="form-link" href="{% url 'signup' %}">Don't have an account ?</a></p>
-        <p><a class="form-link" href="#">Forgot your password ?</a></p>
-        <input type="submit" value="Continue">
-    </form>
-</div>
