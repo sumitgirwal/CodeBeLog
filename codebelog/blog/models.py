@@ -1,6 +1,6 @@
 from django.db import models
 from account.models import User
-
+from datetime import  timezone
 
 # Blog post status
 STATUS = (

@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 
 from account.models import User
 from blog.models import Post, Category

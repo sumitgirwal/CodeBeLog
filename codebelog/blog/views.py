@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from .models import Post, Category
 from .forms import PostForm, PostEditForm
@@ -167,24 +167,14 @@ def deletePost(request, pk):
 
 
 # View a Post
-def viewPost(request, pk):
-    try:
-        post = Post.objects.get(id=pk)
-        post.view += 1
-        post.save()
-    except:
-        pass
-    context = {
-         
-        'post':post
-    }
-
-    return render(request, 'view-post.html', context)
-
-class PostDetail(generic.DetailView):
-    model = Post
-    template_name = 'view-post.html'
-
+def viewPost(request, slug):
+    post = Post.objects.get(slug=slug)
+    # Update the view count
+    session_key = f'key_{post.id}'
+    if not request.session.get(session_key, False):
+        Post.objects.filter(id=post.id).update(view=post.view+1)
+        request.session[session_key] = True    
+    return render(request, 'view-post.html', {'post':post})
 
 
 @login_required(login_url='/account/login/')
