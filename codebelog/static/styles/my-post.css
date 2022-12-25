@@ -1,0 +1,72 @@
+.post-table {
+    border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  td a {
+    padding: 5px 8px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+
+  }
+
+  .danger {
+    border: 1px solid darkred;
+    color: darkred;
+    transition: all 0.3s ease;
+  }
+
+  .danger:hover {
+    color: white;
+    background-color: darkred;
+  }
+
+  .warning {
+    color: black;
+    background-color: lightgoldenrodyellow;
+    border: none;
+    transition: all 0.3s ease;
+  }
+
+  .warning:hover {
+    background-color: rgb(201, 201, 149);
+  }
+
+
+  .post-create {
+    margin-top: 10px;
+    text-align: end;
+    padding: 12px 0;
+  }
+
+  .post-create-btn {
+    padding: 8px 10px;
+    border: 1px solid #6A899D;
+    color: #6A899D;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  
+  .post-create-btn:hover {
+    background-color: #6A899D;
+    color: white;
+  }
+

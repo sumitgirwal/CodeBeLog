@@ -22,7 +22,7 @@
     <div class="blog make-border">
         <div class="blog-right">
             <div class="blog-header">
-                <a href="#">@{{ post.user.name }} </a>
+                <a href="#">@{{ post.auther.name }} </a>
                 <p>{{ post.created_at | timesince }}</p>
             </div>
             <hr>
@@ -89,9 +89,9 @@
     <div class="sidebar-title">
         Categories
     </div>
-    <div class="sidebar-block">
+    <div class="badges">
         {% for cat in cats %}
-            <a href="?search={{cat.name}}">{{ cat.name }}</a>
+            <a href="?search={{cat.name}}" class="badges-link">{{ cat.name }}</a>
         {% endfor %}
     </div>
 

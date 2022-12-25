@@ -1,23 +1,64 @@
-from django.forms import ModelForm
-from .models import Post
+from .models import Post, Category
+from django import forms
 
-# Creating model form
-class PostForm(ModelForm):
+class CustomMMCF(forms.ModelMultipleChoiceField):       
+    def label_from_instance(self, category):
+        return category.name
+
+class PostForm(forms.ModelForm):
+    category = CustomMMCF(
+        queryset=Category.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+    )
 
     class Meta:
-        model = Post
-        fields = ['title', 'subtitle', 'description']
+        model = Post 
+        fields = [
+            'title',
+            'subtitle',
+            'description',
+            'category'
+        ]
     
     def __init__(self, *args, **kwargs):
-        # Allows you to pass the user in from the request, or just set the property
-        if not hasattr(self, 'user'):
-            self.user = kwargs.pop('user')
         super(PostForm, self).__init__(*args, **kwargs)
+         # Sort categories to alphabetically order
+        self.fields['category'].queryset = Category.objects.all().order_by('name')
 
-    def save(self, commit=True):
-        user = super(PostForm, self).save(commit=False)
-        user.user = self.user
-        if commit:
-            user.save()
-        return user
-        
+
+
+class PostEditForm(forms.ModelForm):
+    class Meta:
+        model = Post 
+        fields = [
+            'title',
+            'subtitle',
+            'description',
+            'slug',
+            'category'
+        ]
+    
+ 
+
+
+
+# class PostForm(forms.ModelForm):
+#     category = CustomMMCF(
+#         queryset=Category.objects.all(),
+#         widget=forms.CheckboxSelectMultiple
+#     )
+
+#     class Meta:
+#         model = Post 
+#         fields = [
+#             'title',
+#             'subtitle',
+#             'description',
+#             'slug',
+#             'category'
+#         ]
+    
+#     def __init__(self, *args, **kwargs):
+#         super(PostForm, self).__init__(*args, **kwargs)
+#          # Sort categories to alphabetically order
+#         self.fields['category'].queryset = Category.objects.order_by('name')

@@ -1,0 +1,7 @@
+
+<form action="{% url 'update' post.id %}" method="POST">
+    {{ msg }}
+    {% csrf_token %}
+{{ form.as_p }}
+<input type="submit">
+</form>

@@ -7,14 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeBeLog - {% block page_title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/signup.css' %}">
+    
+    <!-- Core project styles -->
     <link rel="stylesheet" href="{% static 'styles/general.css' %}">
     <link rel="stylesheet" href="{% static 'styles/blog.css' %}">
     <link rel="stylesheet" href="{% static 'styles/sidebar.css' %}">
     <link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
     <link rel="stylesheet" href="{% static 'styles/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/my-post.css' %}">
     
+    <!-- Font Awesome Free's Solid and Brand files -->
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -35,5 +40,6 @@
         </section>
     </main>
 
+     
 </body>
 </html>

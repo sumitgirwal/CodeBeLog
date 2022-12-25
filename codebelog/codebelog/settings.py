@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "view_breadcrumbs",
     'account',
     'blog',
+     'fontawesomefree',
 ]
 
 MIDDLEWARE = [

@@ -65,10 +65,9 @@ def viewUser(request, pk):
 
 @login_required(login_url='/account/login/')
 def dashboard(request):
-    user = request.user 
-    post_count = Post.objects.filter(user=user).count() 
+    post_count = Post.objects.filter(auther=request.user ).count() 
     context = {
-        'user':user,
+        'user':request.user,
         'post_count':post_count
     }
     return render(request, 'dashboard.html', context)

@@ -22,17 +22,26 @@ class Category(models.Model):
 
 # Blog posts
 class Post(models.Model):
-    title = models.CharField(max_length=255, unique=True)
+    # blog details
+    title = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
+    
+    # unique for every title
+    slug = models.SlugField(max_length=255, unique=True)
+
+    # foreign key
+    auther = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    # multi select field
+    category = models.ManyToManyField(Category)
+    
+    # default values
+    status = models.IntegerField(choices=STATUS, default=0)
+    view = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    view = models.PositiveIntegerField(default=0)
-    slug = models.SlugField(max_length=255, unique=True)
-    status = models.IntegerField(choices=STATUS, default=1)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ManyToManyField(Category)
-
+    
     class Meta:
         ordering = ["-id"]
         verbose_name_plural = "Blog Posts"

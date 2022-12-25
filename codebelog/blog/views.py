@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .models import Post, Category
-from .forms import PostForm
+from .forms import PostForm, PostEditForm
 
 from django.views import generic
 from django.contrib.auth.decorators import login_required
@@ -9,15 +9,110 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
 
-from django import template
-register = template.Library()
+# Convert text to slug 
+def textToSlug(text):
+    newTxt = ''
+    for i in text:
+        if i==' ':
+            newTxt += '-'
+        elif i.isalnum():
+            newTxt += i
+    newTxt = newTxt.strip('-')
+    return newTxt
 
-@register.inclusion_tag('sidebar.html')
-def get_category_list():
-    data = {
-        'cats': Category.objects.all()
-    } 
-    return data
+# Create a Post
+@login_required(login_url='/account/login/')
+def createPost(request):
+    msg = ''
+    if request.method=='POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.auther = request.user
+            post.slug = textToSlug(post.title)
+            post.save()
+            form.save_m2m()
+            return redirect('my_post')
+        else:
+            msg = form.errors 
+    return render(request, 'create-post.html', { 'form':PostForm(), 'msg':msg } )
+
+
+# Update a Post
+@login_required(login_url='/account/login/')
+def updatePost(request, pk):
+    try:
+        post = Post.objects.get(id=pk)
+    except:
+        pass
+
+    msg = ''
+    if request.method=='POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.slug = textToSlug(post.title)
+            post.save()
+            form.save_m2m()
+            return redirect('my_post')
+        else:
+            msg = form.errors 
+    return render(request, 'create-post.html', { 'form':PostForm(instance=post), 'post':post, 'msg':msg } )
+
+# Post Creation
+# @login_required(login_url='/account/login/')
+# def createPost(request):
+#     msg = ''
+#     if request.method == 'POST':
+#         form = PostForm(request.POST)
+#         if form.is_valid():
+#             instance = form.save(commit=False)
+#             instance.user = request.user
+#             instance.save()
+#             return redirect('my_post')
+#         else:
+#             msg = form.errors
+#     form = PostForm()
+#     context = {
+#         'form':form,
+#         'msg':msg
+#     }
+#     return render(request, 'create-post.html', context)
+
+# # Update a Post
+# @login_required(login_url='/account/login/')
+# def updatePost(request, pk):
+#     post = None
+#     msg = ''
+#     try:
+#         post = Post.objects.get(id=pk, user=request.user)
+#     except:
+#         pass
+    
+#     if request.method == 'POST':
+#         form = PostForm(request.POST, instance=post)
+#         # form = PostForm(request.POST, instance=post , user=request.user)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('my_post')
+#         else:
+#             msg = form.errors
+
+#     # form = PostForm(instance=post, user=request.user)
+#     form = PostForm(instance=post)
+#     context = {
+#         'form':form,
+#         'post':post,
+#         'form_action':'edit',
+#         'msg':msg
+#     }
+#     return render(request, 'create-post.html', context)
+
+
+
+
+
+ 
 
 # Home 
 def index(request):
@@ -51,21 +146,6 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-# Post Creation
-@login_required(login_url='/account/login/')
-def createPost(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST, user=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('/')
-    form = PostForm(user=request.user)
-    context = {
-        'form':form
-    }
-    return render(request, 'create-post.html', context)
-
-
 # Delete a Post
 @login_required(login_url='/account/login/')
 def deletePost(request, pk):
@@ -84,26 +164,6 @@ def deletePost(request, pk):
     return render(request, 'delete-post.html', context)
 
 
-# Update a Post
-@login_required(login_url='/account/login/')
-def updatePost(request, pk):
-    try:
-        post = Post.objects.get(id=pk, user=request.user)
-    except:
-        pass
-
-    if request.method == 'POST':
-        form = PostForm(request.POST, instance=post , user=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('/')
-
-    form = PostForm(instance=post, user=request.user)
-    context = {
-        'form':form,
-        'post':post
-    }
-    return render(request, 'update-post.html', context)
 
 
 # View a Post
@@ -124,3 +184,16 @@ def viewPost(request, pk):
 class PostDetail(generic.DetailView):
     model = Post
     template_name = 'view-post.html'
+
+
+
+@login_required(login_url='/account/login/')
+def myPost(request):
+    posts = Post.objects.filter(auther=request.user)
+    context = {
+        'posts':posts,
+        'post_count':posts.count()
+    }
+    return render(request, 'my-post.html', context)
+
+

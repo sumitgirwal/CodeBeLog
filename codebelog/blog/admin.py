@@ -4,11 +4,12 @@ from blog.models import Post, Category
 
 # Post admin model
 class PostAdminModel(admin.ModelAdmin):
-    list_display = ['id', 'title', 'user', 'status', 'created_at']
+    list_display = ['id', 'title', 'auther', 'status', 'created_at']
     list_display_links = ['id', 'title', ]
     list_filter = ("status",)
     search_fields = ['title', 'subtitle', 'slug']
-    ordering = ['id', 'user' , 'title', 'created_at']
+    ordering = ['id', 'auther' , 'title', 'created_at']
+    # auto fill for slug
     prepopulated_fields = {'slug': ('title',)}
 
 

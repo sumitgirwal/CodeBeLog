@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block page_title %} My Post {% endblock %}
+
+
+<!-- left page -->
+{% block left_page %}
+<style>
+     .not-found {
+        text-align: center;
+     }
+     table {
+        background-color: white;
+        padding: 20px;
+     }
+</style>
+
+<!-- Post data table -->
+<section class="post-section">
+     
+    <div class="post-create">
+        <a href="{% url 'create' %}" class="post-create-btn"><i class="fa fa-plus"></i> Create Post</a>
+    </div>
+
+   
+    {% if post_count == 0 %}
+    <!-- Posts not found -->
+    <div class="not-found">Sorry, No articles found!</div>
+    {% else %}
+    <!-- Post table -->
+    <table class="post-table">
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Date Time</th>
+            <th>Action</th>
+        </tr>
+        {% for post in posts %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td><a href="/{{ post.slug }}" target="_blank" class="make-link">{{ post.title | title}}</a></td>
+            <td>{{ post.created_at  }}</td>
+            <td> 
+                <a href="{% url 'update' post.id %}" class="warning"><i class="fa fa-pen-to-square"></i> Edit</a>
+                <a href="#" class="danger"><i class="fa fa-trash"></i> Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</section>
+{% endblock %}
+
+
+<!-- right page -->
+{% block right_page %}
+<section class="sidebar">
+     
+    <!-- search -->
+    <form class="search-form" action="/" method="GET">
+        <input type="text" name="search" placeholder="Search Articles, Category...">
+        <input type="submit" value="Search">
+    </form>
+
+    <!-- sidebar  -->
+    <div class="sidebar-title">
+        Stats
+    </div>
+    <div class="sidebar-block"> 
+        <a href="#">Total Post : 23</a>
+        <a href="#">Like : 3</a>
+        <a href="#">Follower : 3</a>        
+        <a href="#">Following : 5</a>        
+    </div>
+
+</section>
+{% endblock %}
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
