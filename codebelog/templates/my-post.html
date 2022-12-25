@@ -18,7 +18,7 @@
 <section class="post-section">
      
     <div class="post-create">
-        <a href="{% url 'create' %}" class="post-create-btn"><i class="fa fa-plus"></i> Create Post</a>
+        <a href="{% url 'create_post' %}" class="post-create-btn"><i class="fa fa-plus"></i> Create Post</a>
     </div>
 
    
@@ -37,10 +37,10 @@
         {% for post in posts %}
         <tr>
             <td>{{ forloop.counter }}</td>
-            <td><a href="/{{ post.slug }}" target="_blank" class="make-link">{{ post.title | title}}</a></td>
+            <td><a href="/{{ post.slug }}" target="_blank" class="make-link">{{ post.title | title |truncatechars:30 }}</a></td>
             <td>{{ post.created_at  }}</td>
             <td> 
-                <a href="{% url 'update' post.id %}" class="warning"><i class="fa fa-pen-to-square"></i> Edit</a>
+                <a href="{% url 'update_post' post.id %}" class="warning"><i class="fa fa-pen-to-square"></i> Edit</a>
                 <a href="#" class="danger"><i class="fa fa-trash"></i> Delete</a>
             </td>
         </tr>

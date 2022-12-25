@@ -1,5 +1,5 @@
 
-<form action="{% url 'update' post.id %}" method="POST">
+<form action="{% url 'update_post' post.id %}" method="POST">
     {{ msg }}
     {% csrf_token %}
 {{ form.as_p }}

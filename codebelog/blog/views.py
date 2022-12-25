@@ -59,61 +59,7 @@ def updatePost(request, pk):
             msg = form.errors 
     return render(request, 'create-post.html', { 'form':PostForm(instance=post), 'post':post, 'msg':msg } )
 
-# Post Creation
-# @login_required(login_url='/account/login/')
-# def createPost(request):
-#     msg = ''
-#     if request.method == 'POST':
-#         form = PostForm(request.POST)
-#         if form.is_valid():
-#             instance = form.save(commit=False)
-#             instance.user = request.user
-#             instance.save()
-#             return redirect('my_post')
-#         else:
-#             msg = form.errors
-#     form = PostForm()
-#     context = {
-#         'form':form,
-#         'msg':msg
-#     }
-#     return render(request, 'create-post.html', context)
-
-# # Update a Post
-# @login_required(login_url='/account/login/')
-# def updatePost(request, pk):
-#     post = None
-#     msg = ''
-#     try:
-#         post = Post.objects.get(id=pk, user=request.user)
-#     except:
-#         pass
-    
-#     if request.method == 'POST':
-#         form = PostForm(request.POST, instance=post)
-#         # form = PostForm(request.POST, instance=post , user=request.user)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('my_post')
-#         else:
-#             msg = form.errors
-
-#     # form = PostForm(instance=post, user=request.user)
-#     form = PostForm(instance=post)
-#     context = {
-#         'form':form,
-#         'post':post,
-#         'form_action':'edit',
-#         'msg':msg
-#     }
-#     return render(request, 'create-post.html', context)
-
-
-
-
-
  
-
 # Home 
 def index(request):
     search = request.GET.get('search','')

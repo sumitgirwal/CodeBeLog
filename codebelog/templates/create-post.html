@@ -81,7 +81,7 @@
         </div>
         {% if post %}
            <!-- Edit Form -->
-           <form class="create-form" action="{% url 'update' post.id %}" method="POST">
+           <form class="create-form" action="{% url 'update_post' post.id %}" method="POST">
                 <h1 class="form-title">Edit Blog</h1>
                 <hr>
                 {% csrf_token %}
