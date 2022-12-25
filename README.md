@@ -10,16 +10,34 @@ CodeBeLog webapplication for blogging.
 #### Setup & Run
 ```bash
 .\venv\Scripts\activate
-cd codebelog
-python manage.py runserver
-hit url: 
-```
 
-#### Install dummy database
-```bash
+- run those command
+[Create your own virtual env]
+
+
+- activate virtual env
+
+- install dependency
+pip install -r requirements.txt
+cd codebelog
 python manage.py makemigrations
 python manage.py migrate
 
+- run server
+python manage.py runserver
+
+- hit url
+http://127.0.0.1:8000/
+```
+
+#### Install dummy data
+```bash
+- create/export db backup
+python manage.py dumpdata > db_backup.json
+
+
+- import dummy data
+python manage.py loaddata db_backup.json
 ```
 
 #### Features Done
@@ -34,6 +52,7 @@ python manage.py migrate
 - Login signup page error and success messages flash
 - Search by category 
 - User dashboard 
+- User Post CRUD
 
 
 #### Features
@@ -52,4 +71,10 @@ Wechat official account feature integrated. Now, you can use wechat official acc
 
 #### Resources
 - [Core Template](https://github.com/sumitgirwal/CodeBeLog-Template)
+- [Virutal Env Doc](https://virtualenv.pypa.io/en/latest/installation.html)
 - [Django Docs](https://docs.djangoproject.com/en/4.1/intro/tutorial01/)
+- [ManyToMany Field](https://stackoverflow.com/questions/28057512/django-form-with-many-to-many-relationship-does-not-save)
+
+- [DB Backups](https://coderwall.com/p/mvsoyg/django-dumpdata-and-loaddata)
+- [UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte](https://stackoverflow.com/questions/17843630/python-can-dumpdata-cannot-loaddata-back-unicodedecodeerror)
+    Just install notepad++,open file, change encoding to UTF-8 save and run the loaddata commads
