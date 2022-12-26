@@ -41,7 +41,7 @@
             <td>{{ post.created_at  }}</td>
             <td> 
                 <a href="{% url 'update_post' post.id %}" class="warning"><i class="fa fa-pen-to-square"></i> Edit</a>
-                <a href="#" class="danger"><i class="fa fa-trash"></i> Delete</a>
+                <a href="{% url 'delete_post' post.id %}" class="danger"><i class="fa fa-trash"></i> Delete</a>
             </td>
         </tr>
         {% endfor %}
@@ -74,5 +74,4 @@
 
 </section>
 {% endblock %}
-
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+ 

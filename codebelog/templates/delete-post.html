@@ -1,15 +1,67 @@
-<div>
-    
-    <div class="blog">
-        <h3>{{ post.title }} </h3>
-        <b>{{ post.updated_at | timesince }}</b>
-        <p>{{ post.subtitle }}</p>
-        <p>{{ post.description }}</p>
-    </div>
+{% extends 'base.html' %}
+{% block page_title %} Delete Post {% endblock %}
+
+
+<!-- left page -->
+{% block left_page %}
+<style>
+     .not-found {
+        text-align: center;
+     }
+     table {
+        background-color: white;
+        padding: 20px;
+     }
+</style>
+
+<!-- Post data table -->
+<section class="post-section">
      
-    <form action="/delete/{{ post.id }}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="Delete">
+    <div>
+        <div class="blog">
+            <h3>{{ post.title }} </h3>
+            <b>{{ post.updated_at | timesince }}</b>
+            <p>{{ post.subtitle }}</p>
+            <p>{{ post.description|truncatechars:100 }}</p>
+            <p class="danger-text">Do you want to Delete this post?</p>
+            <form action="/delete/{{ post.id }}" method="POST">
+            {% csrf_token %}
+            <input  class="danger-btn" type="submit" value="Yes, Sure">
+                <a href="{% url 'my_post' %}" class="cancel-btn" >Cancel</a>
+        </form>
+        </div>
+         
+         
+    
+    </div>
+    
+    
+</section>
+{% endblock %}
+
+
+<!-- right page -->
+{% block right_page %}
+<section class="sidebar">
+     
+    <!-- search -->
+    <form class="search-form" action="/" method="GET">
+        <input type="text" name="search" placeholder="Search Articles, Category...">
+        <input type="submit" value="Search">
     </form>
 
-</div>
+    <!-- sidebar  -->
+    <div class="sidebar-title">
+        Stats
+    </div>
+    <div class="sidebar-block"> 
+        <a href="#">Total Post : 23</a>
+        <a href="#">Like : 3</a>
+        <a href="#">Follower : 3</a>        
+        <a href="#">Following : 5</a>        
+    </div>
+
+</section>
+{% endblock %}
+
+ 

@@ -95,19 +95,17 @@ def index(request):
 # Delete a Post
 @login_required(login_url='/account/login/')
 def deletePost(request, pk):
+    post = None
     try:
-        post = Post.objects.get(id=pk, user=request.user)
-    except:
-        pass
+        post = Post.objects.get(id=pk, auther=request.user)
+    except Exception as e:
+        print(e)
 
     if request.method=='POST':
         post.delete()
-        return redirect('/')
-        
-    context = {
-        'post': post
-    }
-    return render(request, 'delete-post.html', context)
+        return redirect('my_post')
+
+    return render(request, 'delete-post.html', {'post': post})
 
 
 
