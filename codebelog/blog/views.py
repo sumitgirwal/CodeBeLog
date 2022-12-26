@@ -115,12 +115,13 @@ def deletePost(request, pk):
 # View a Post
 def viewPost(request, slug):
     post = Post.objects.get(slug=slug)
+    cats = post.category.all()
     # Update the view count
     session_key = f'key_{post.id}'
     if not request.session.get(session_key, False):
         Post.objects.filter(id=post.id).update(view=post.view+1)
         request.session[session_key] = True    
-    return render(request, 'view-post.html', {'post':post})
+    return render(request, 'view-post.html', {'post':post, 'cats':cats})
 
 
 @login_required(login_url='/account/login/')

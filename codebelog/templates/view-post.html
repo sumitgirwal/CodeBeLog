@@ -36,10 +36,11 @@
 
     <!-- sidebar  -->
     <div class="sidebar-title">
+        Categories
     </div>
-    <div class="sidebar-block">
-         {% for cat in post.category.all %}
-         <a href="/?search={{cat.name}}">{{ cat.name }}</a>
+    <div class="badges">
+        {% for cat in cats %}
+            <a href="?search={{cat.name}}" class="badges-link">{{ cat.name }}</a>
         {% endfor %}
     </div>
 
