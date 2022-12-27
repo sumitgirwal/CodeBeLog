@@ -1,5 +1,5 @@
-from .models import Post, Category
 from django import forms
+from .models import Post, Category, Comment
 
 class CustomMMCF(forms.ModelMultipleChoiceField):       
     def label_from_instance(self, category):
@@ -38,7 +38,11 @@ class PostEditForm(forms.ModelForm):
             'category'
         ]
     
- 
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['body']
 
 
 

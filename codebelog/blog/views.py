@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseRedirect
-from .models import Post, Category
-from .forms import PostForm, PostEditForm
+from django.http import HttpResponse
+from .models import Post, Category, Comment
+from .forms import PostForm, PostEditForm, CommentForm
 
 from django.views import generic
 from django.contrib.auth.decorators import login_required
@@ -114,12 +114,28 @@ def deletePost(request, pk):
 def viewPost(request, slug):
     post = Post.objects.get(slug=slug)
     cats = post.category.all()
+    
     # Update the view count
     session_key = f'key_{post.id}'
     if not request.session.get(session_key, False):
         Post.objects.filter(id=post.id).update(view=post.view+1)
-        request.session[session_key] = True    
-    return render(request, 'view-post.html', {'post':post, 'cats':cats})
+        request.session[session_key] = True 
+    
+    msg = ''
+    if request.method=='POST':
+        if request.user.is_authenticated and request.POST['body']:
+            body = request.POST['body']
+            comment = Comment(auther=request.user, post=post, body=body)
+            comment.save()
+            msg = "Comment added successfully!"
+        else:
+            msg = "Please login first"
+    comments = Comment.objects.filter(post=post, status=True).order_by('-created_at')
+    print(comments)
+    context = {'post':post, 'cats':cats, 'msg':msg, 'comments':comments}
+    return render(request, 'view-post.html', context)
+
+
 
 
 @login_required(login_url='/account/login/')
@@ -132,3 +148,14 @@ def myPost(request):
     return render(request, 'my-post.html', context)
 
 
+# Like a post 
+@login_required(login_url='/account/login/')
+def likePost(request):
+    msg = ''
+    if request.method=='POST':
+        like = request.POST['post_id']
+        msg = str(like)+'Getting post id like value'
+        print("##############",msg)
+        return
+    else:
+        return

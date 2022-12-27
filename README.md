@@ -10,6 +10,10 @@ CodeBeLog webapplication for blogging.
 #### Setup & Run
 ```bash
 .\venv\Scripts\activate
+cd codebelog
+python manage.py runserver
+
+http://127.0.0.1:8000/
 
 - run those command
 [Create your own virtual env]
@@ -53,6 +57,8 @@ python manage.py loaddata db_backup.json
 - Search by category 
 - User dashboard 
 - User Post CRUD
+- Comment by user and 
+- Comment approve by admin
 
 
 #### Features

@@ -3,8 +3,128 @@
 {% load blog_tags %}
 {% block page_title %}  Post View {% endblock %}
 
+
+
 <!-- left page -->
 {% block left_page %}
+<style>
+    .post-tool {
+        width: 100px;
+    }
+
+    .post-tool-link {
+        padding: 10px 8px;
+        color: lightblue;
+    }
+
+    .post-tool-link .active{
+        padding: 10px 8px;
+        color: lightskyblue;
+    }
+
+    textarea {
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        height: 100px;
+        width: 100%;
+        padding: 5px;
+        font-family: Roboto, Arial;
+    }
+
+    textarea::placeholder {
+        color: #403535;
+        font-size: 15px;
+    }
+
+    .avatar {  
+        overflow:hidden;   
+    }
+
+    .user-icon {
+        border-radius: 4em;
+        border: 1px solid skyblue;
+        height: 2em;
+        width: 2em;
+        background: none;   
+    }
+
+    .user-icon{
+      border-radius:4em; border:1px solid skyblue;
+      height:2em; width:2em;  
+      background:none;padding:0.1em;  
+  }
+
+  .comment-form {
+      display: flex;
+      
+  }
+
+  .comment-reply {
+    margin: 20px 30px;
+    border: 1px solid #dedada;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.comment-details {
+  font-size: 14px;
+  
+}
+
+.reply {
+    margin-left: 10px;
+    padding: 10px;
+}
+
+.comment-form-right {
+    margin-left: 10px;
+    width: 100%;
+
+}
+
+.comment-btn {
+    padding: 6px;
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-top: 6px;
+}
+
+.comment-btn:hover {
+    background-color: black;
+    color: white;
+}
+
+.comment-blog-img {
+    height: 25px;
+    width: 25px;
+    border-radius: 15px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.comment-header {
+    display: flex;
+    align-items: start;
+}
+
+.comment-header-right {
+    margin-left: 10px;
+}
+
+.comment-header-right-name {
+    font-size: 12px;
+    font-family: Roboto, Arial;
+   font-weight: 500;
+}
+
+.comment-header-right-date {
+    font-size: 10px;
+    color: rgb(185, 181, 181);
+}
+</style>
 <section class="blog-view">
     <div class="blog-view-header">
         <h1 class="blog-header-title"> {{ post.title|title }} </h1>
@@ -19,6 +139,42 @@
     <div class="blog-view-footer">
         <img class="blog-img" src="{{ post.auther.photo.url }}" alt="User Logo">
         <p> Contributed By: <a href="#" class="make-link">@{{ post.auther.name }}</a> </p>
+    </div>
+    <hr>
+    <div class="post-tool">
+        <form action="/likepost/" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="post_id" value="{{ post.id }}">
+            <button class="post-tool-link" type="submit"><i class="fa-regular fa-heart"></i></button>
+            <button class="post-tool-link" type="submit"><i class="fa-regular fa-comment"></i></button>
+        </form> 
+    </div>
+    <hr>
+    <div class="comment">
+        <h1>Comment</h1>
+        {{ msg }}
+        <form class="comment-form" method="POST">
+            {% csrf_token %}
+            <img class="blog-img" src="{{ post.auther.photo.url }}" alt="User Logo">
+            <div class="comment-form-right">
+                <textarea name="body" placeholder="Your Comment..."></textarea>
+                <button class="comment-btn" type="submit"><i class="fa-solid fa-paper-plane"></i> Send </button>
+            </div>
+        </form>
+        <div class="reply">
+            {% for comment in comments %}
+            <div class="comment-reply">
+                <div class="comment-header">
+                    <img class="comment-blog-img" src="{{ comment.auther.photo.url }}" alt="User Logo">
+                    <div class="comment-header-right">
+                        <a href="#" class="comment-header-right-name">@{{ comment.auther.name }}</a>
+                        <div class="comment-header-right-date">{{ comment.created_at|timesince }} </div>
+                    </div>
+                </div>
+                <p class="comment-details">{{ comment.body|title }}</p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 {% endblock %}
@@ -40,7 +196,7 @@
     </div>
     <div class="badges">
         {% for cat in cats %}
-            <a href="?search={{cat.name}}" class="badges-link">{{ cat.name }}</a>
+        <a href="?search={{cat.name}}" class="badges-link">{{ cat.name|title }}</a>
         {% endfor %}
     </div>
 

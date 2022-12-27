@@ -2,6 +2,8 @@ from django.db import models
 from account.models import User
 from datetime import  timezone
 
+
+
 # Blog post status
 STATUS = (
     (0, "Public"),
@@ -35,6 +37,8 @@ class Post(models.Model):
 
     # multi select field
     category = models.ManyToManyField(Category)
+    # likes
+    like = models.ManyToManyField(User, related_name='blogpost_like')
     
     # default values
     status = models.IntegerField(choices=STATUS, default=0)
@@ -46,7 +50,23 @@ class Post(models.Model):
         ordering = ["-id"]
         verbose_name_plural = "Blog Posts"
 
+    def number_of_likes(self):
+        return self.likes.count()
+        
     def __str__(self):
         return str(self.id)+' | '+self.title
     
-    
+
+# Comment
+class Comment(models.Model):
+    auther = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    body = models.TextField()
+    status = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_at']
+
+    def __str__(self):
+        return 'Comment {} by {}'.format(self.body, self.auther.name)
