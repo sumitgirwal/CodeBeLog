@@ -8,9 +8,7 @@
 <!-- left page -->
 {% block left_page %}
 <style>
-    .post-tool {
-        width: 100px;
-    }
+   
 
     .post-tool-link {
         padding: 10px 8px;
@@ -124,10 +122,30 @@
     font-size: 10px;
     color: rgb(185, 181, 181);
 }
+
+.post-like-link {
+    font-size: 20px;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: unset;
+    text-align: center;
+}
+
+.post-like-link:hover {
+     color: white;
+     background-color: black;
+}
+
+.post-tool {
+   text-align: center;
+}
 </style>
 <section class="blog-view">
     <div class="blog-view-header">
-        <h1 class="blog-header-title"> {{ post.title|title }} </h1>
+        <h1 class="blog-header-title">{{ post.title|title }} </h1>
         <p> {{ post.updated_at | date }} | Views: {{ post.view }}</p>
     </div>
     <hr>
@@ -141,17 +159,27 @@
         <p> Contributed By: <a href="#" class="make-link">@{{ post.auther.name }}</a> </p>
     </div>
     <hr>
-    <div class="post-tool">
-        <form action="/likepost/" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="post_id" value="{{ post.id }}">
-            <button class="post-tool-link" type="submit"><i class="fa-regular fa-heart"></i></button>
-            <button class="post-tool-link" type="submit"><i class="fa-regular fa-comment"></i></button>
-        </form> 
-    </div>
+    
+    <!-- Like a post -->
+    {% if user.is_authenticated %}
+    <form action="{% url 'blogpost_like' object.id %}" method="POST">
+        {% csrf_token %}
+        {% if post_is_liked %}
+            <button type="submit" name="blogpost_id" value="{{ object.id }}" class="post-like-link">
+                <i class="fa-regular fa-heart"></i> Unlike</button>
+        {% else %}
+            <button type="submit" name="blogpost_id" value="{{ object.id }}" class="post-like-link">
+                <i class="fa-regular fa-heart"></i> Like</button>
+        {% endif %}
+    </form>
+    {% else %}
+        <a class="btn btn-outline-info" href="{% url 'login' %}?next={{request.path}}">Log in to like this article!</a><br>
+    {% endif %}
+    <strong class="text-secondary">{{ number_of_likes }} Like{{ number_of_likes|pluralize }}</strong>
+
     <hr>
     <div class="comment">
-        <h1>Comment</h1>
+        <h1>{{ comments_count }} comments</h1>
         {{ msg }}
         <form class="comment-form" method="POST">
             {% csrf_token %}

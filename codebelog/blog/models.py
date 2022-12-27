@@ -38,7 +38,7 @@ class Post(models.Model):
     # multi select field
     category = models.ManyToManyField(Category)
     # likes
-    like = models.ManyToManyField(User, related_name='blogpost_like')
+    likes = models.ManyToManyField(User, related_name='blogpost_like')
     
     # default values
     status = models.IntegerField(choices=STATUS, default=0)

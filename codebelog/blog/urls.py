@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index , name='home'),
-    
+    path('like/<int:pk>', views.BlogPostLike, name="blogpost_like"),
     path('create/', views.createPost , name='create_post'),
     path('update/<int:pk>', views.updatePost , name='update_post'),
     path('delete/<int:pk>', views.deletePost , name='delete_post'),
@@ -12,4 +12,6 @@ urlpatterns = [
 
     # check slug after check above urls
     path('<slug:slug>/', views.viewPost , name='view_post'),
+
+    
 ]

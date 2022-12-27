@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Post, Category, Comment
 from .forms import PostForm, PostEditForm, CommentForm
 
@@ -8,6 +8,11 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
+from django.urls import reverse
+
+ 
+
+ 
 
 # Convert text to slug 
 def textToSlug(text):
@@ -114,27 +119,62 @@ def deletePost(request, pk):
 def viewPost(request, slug):
     post = Post.objects.get(slug=slug)
     cats = post.category.all()
+    # post = get_object_or_404(BlogPost, id=request.POST.get('blogpost_id'))
     
     # Update the view count
-    session_key = f'key_{post.id}'
+    session_key = 'key_'+str(post.id)
     if not request.session.get(session_key, False):
         Post.objects.filter(id=post.id).update(view=post.view+1)
         request.session[session_key] = True 
     
     msg = ''
     if request.method=='POST':
-        if request.user.is_authenticated and request.POST['body']:
-            body = request.POST['body']
-            comment = Comment(auther=request.user, post=post, body=body)
-            comment.save()
-            msg = "Comment added successfully!"
+        if request.user.is_authenticated:
+            if request.POST.get('body', False):
+                body = request.POST.get('body')
+                comment = Comment(auther=request.user, post=post, body=body)
+                comment.save()
+                msg = "Comment added successfully!!! Wait for approved by admin"
+            elif  request.POST.get('like', False):
+                if post.likes.filter(id=request.user.id).exists():
+                    post.likes.remove(request.user)
+                else:
+                    post.likes.add(request.user)
+
+                Post.objects.filter(id=post.id).update(like=request.user)
+                msg = "Added like to post!!!" 
+
         else:
             msg = "Please login first"
+
     comments = Comment.objects.filter(post=post, status=True).order_by('-created_at')
-    print(comments)
-    context = {'post':post, 'cats':cats, 'msg':msg, 'comments':comments}
+    comments_count = comments.count()
+     
+    # Like a post
+    likes_connected = post
+    liked = False
+    if likes_connected.likes.filter(id=request.user.id).exists():
+        liked = True
+    number_of_likes = likes_connected.number_of_likes()
+    post_is_liked = liked
+    context = {
+        'number_of_likes':number_of_likes,
+        'post_is_liked':post_is_liked,
+        'object':likes_connected,
+        'post':post, 'cats':cats, 'msg':msg, 'comments':comments, 'comments_count':comments_count
+    }
     return render(request, 'view-post.html', context)
 
+
+
+def BlogPostLike(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('blogpost_id'))
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+    slug = post.slug
+    return HttpResponseRedirect(reverse('view_post', args=[str(slug)]))
 
 
 
@@ -159,3 +199,21 @@ def likePost(request):
         return
     else:
         return
+
+
+
+
+
+# def BlogDetails(request, pk):
+#     likes_connected = Post.objects.get(id=pk)
+#     liked = False
+#     if likes_connected.likes.filter(id=request.user.id).exists():
+#         liked = True
+#     number_of_likes = likes_connected.number_of_likes()
+#     post_is_liked = liked
+#     context = {
+#         'number_of_likes':number_of_likes,
+#         'post_is_liked':post_is_liked,
+#         'object':likes_connected
+#     }
+#     return render(request, 'temp.html', context)

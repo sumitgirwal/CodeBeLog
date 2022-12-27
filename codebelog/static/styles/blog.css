@@ -2,7 +2,6 @@
 .blog-section {
   display: grid;
   gap: 16px;
-
 }
 
 .blog {   
@@ -155,22 +154,22 @@
 
 
 .danger-text {
-  color: red;
+  color: #ba2121;
   font-size: 14px;
   font-weight: 500;
 }
 
 .danger-btn {
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 10px;
+  background-color: #ba2121;
+  color: white;
+  font-weight: 500;
+  font-family: Roboto;
+  cursor: pointer;
   transition: all 0.3s ease;
-font-size: 16px;
-border: none;
-border-radius: 5px;
-padding: 8px 10px;
-background-color: red;
-color: white;
-font-weight: 500;
-font-family: Roboto;
-cursor: pointer;;
 }
 
 .cancel-btn {
