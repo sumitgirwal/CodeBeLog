@@ -7,19 +7,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeBeLog - {% block page_title %}{% endblock %}</title>
-     <!-- Our project just needs Font Awesome Free's Solid and Brand files -->
-     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
-     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
-     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
-    <!-- Core project styles -->
-    <link rel="stylesheet" href="{% static 'styles/general.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/blog.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/sidebar.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/dashboard.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/my-post.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logos/favicon.png' %}">
+
+    <!-- Our project just needs Font Awesome Free's Solid and Brand files -->
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
     
-   
+    <!-- Core project styles -->
+    <link href="{% static 'styles/blog.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'styles/general.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'styles/sidebar.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'styles/navbar.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'styles/dashboard.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'styles/my-post.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'styles/viewpost.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'styles/createpost.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'styles/userprofile.css' %}" rel="stylesheet" type="text/css">
+
 </head>
 <body>
 
@@ -39,9 +44,6 @@
             {% block right_page %}{% endblock %}
         </section>
     </main>
-
-
-   
-     
+    
 </body>
 </html>

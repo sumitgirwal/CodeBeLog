@@ -178,6 +178,7 @@ def BlogPostLike(request, pk):
 
 
 
+
 @login_required(login_url='/account/login/')
 def myPost(request):
     posts = Post.objects.filter(auther=request.user)

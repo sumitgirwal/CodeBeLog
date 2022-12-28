@@ -4,16 +4,17 @@
 
 <!-- left page -->
 {% block left_page %}
+
 <!-- Profile -->
 <section class="profile-section">
     <div class="profile">
-        <img src="{{ user.photo.url }}" alt="">
+        <img src="{{ user.photo.url }}" alt="user logo">
         <div class="profile-details">
             <div class="profile-name">{{ user.name | title}}</div>
             <div class="profile-email">{{ user.email }}</div>
             <div class="profile-stats">
                 <button class="stats-btn">Posts {{ post_count }}</button>
-                <button class="stats-btn">Likes 10</button>
+                <button class="stats-btn">Likes {{ post_likes }}</button>
                 <button class="stats-btn">Follower 10</button>
                 <button class="stats-btn">Following 15</button>
             </div>
