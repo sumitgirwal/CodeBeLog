@@ -7,7 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeBeLog - {% block page_title %}{% endblock %}</title>
-    
+     <!-- Our project just needs Font Awesome Free's Solid and Brand files -->
+     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
     <!-- Core project styles -->
     <link rel="stylesheet" href="{% static 'styles/general.css' %}">
     <link rel="stylesheet" href="{% static 'styles/blog.css' %}">
@@ -16,10 +19,7 @@
     <link rel="stylesheet" href="{% static 'styles/dashboard.css' %}">
     <link rel="stylesheet" href="{% static 'styles/my-post.css' %}">
     
-    <!-- Font Awesome Free's Solid and Brand files -->
-    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+   
 </head>
 <body>
 

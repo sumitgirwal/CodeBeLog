@@ -41,10 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "view_breadcrumbs",
+    
+    # Install apps
+    'fontawesomefree',
+    
+    # User apps
     'account',
     'blog',
-     'fontawesomefree',
+   
 ]
 
 MIDDLEWARE = [

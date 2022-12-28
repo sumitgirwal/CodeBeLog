@@ -132,19 +132,44 @@
     border: 1px solid black;
     background-color: unset;
     text-align: center;
+    
 }
 
 .post-like-link:hover {
      color: white;
      background-color: black;
 }
+.post-unlike-link {
+    font-size: 20px;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid black;
+    color: white;
+    background-color: black;
+    text-align: center;
+    
+}
+
+.post-unlike-link:hover {
+    background-color: white;
+     color: black;
+}
+
+
 
 .post-tool {
    text-align: center;
 }
+
+.post-like {
+    margin: 10px auto;
+    text-align: center;
+}
 </style>
 <section class="blog-view">
-    <div class="blog-view-header">
+    <div class="blog-view-header"> 
         <h1 class="blog-header-title">{{ post.title|title }} </h1>
         <p> {{ post.updated_at | date }} | Views: {{ post.view }}</p>
     </div>
@@ -162,25 +187,32 @@
     
     <!-- Like a post -->
     {% if user.is_authenticated %}
-    <form action="{% url 'blogpost_like' object.id %}" method="POST">
+    <form action="{% url 'blogpost_like' object.id %}" method="POST" class="post-like">
         {% csrf_token %}
         {% if post_is_liked %}
-            <button type="submit" name="blogpost_id" value="{{ object.id }}" class="post-like-link">
+            <button type="submit" name="blogpost_id" value="{{ object.id }}" class="post-unlike-link">
                 <i class="fa-regular fa-heart"></i> Unlike</button>
         {% else %}
             <button type="submit" name="blogpost_id" value="{{ object.id }}" class="post-like-link">
                 <i class="fa-regular fa-heart"></i> Like</button>
         {% endif %}
+       
     </form>
     {% else %}
         <a class="btn btn-outline-info" href="{% url 'login' %}?next={{request.path}}">Log in to like this article!</a><br>
     {% endif %}
     <strong class="text-secondary">{{ number_of_likes }} Like{{ number_of_likes|pluralize }}</strong>
+   
 
     <hr>
+
+    <!-- Comment section -->
     <div class="comment">
         <h1>{{ comments_count }} comments</h1>
         {{ msg }}
+
+        <!-- user comments -->
+        {% if user.is_authenticated %}
         <form class="comment-form" method="POST">
             {% csrf_token %}
             <img class="blog-img" src="{{ post.auther.photo.url }}" alt="User Logo">
@@ -189,6 +221,11 @@
                 <button class="comment-btn" type="submit"><i class="fa-solid fa-paper-plane"></i> Send </button>
             </div>
         </form>
+        {% else %}
+        <a class="btn btn-outline-info" href="{% url 'login' %}?next={{request.path}}">Log in to like this article!</a><br>
+        {% endif %}
+       
+
         <div class="reply">
             {% for comment in comments %}
             <div class="comment-reply">
@@ -214,7 +251,7 @@
     
     <!-- search -->
     <form class="search-form" action="/" method="GET">
-        <input type="text" name="search" placeholder="Search...">
+        <input type="text" name="search" placeholder="Search Articles, Category...">
         <input type="submit" value="Search">
     </form>
 

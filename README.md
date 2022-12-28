@@ -59,6 +59,7 @@ python manage.py loaddata db_backup.json
 - User Post CRUD
 - Comment by user and 
 - Comment approve by admin
+- Like by user and show message if not logged in for comment and likes
 
 
 #### Features
@@ -84,3 +85,4 @@ Wechat official account feature integrated. Now, you can use wechat official acc
 - [DB Backups](https://coderwall.com/p/mvsoyg/django-dumpdata-and-loaddata)
 - [UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte](https://stackoverflow.com/questions/17843630/python-can-dumpdata-cannot-loaddata-back-unicodedecodeerror)
     Just install notepad++,open file, change encoding to UTF-8 save and run the loaddata commads
+- [Django Fontawesome](https://fontawesome.com/docs/web/use-with/python-django)
