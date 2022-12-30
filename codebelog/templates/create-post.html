@@ -36,6 +36,28 @@
 </section>
 {% endblock %}
 
+<!-- right page -->
+{% block right_page %}
+<section class="sidebar">
+     
+    <!-- search -->
+    <form class="search-form" action="/" method="GET">
+        <input type="text" name="search" placeholder="Search Articles, Category...">
+        <input type="submit" value="Search">
+    </form>
 
+    <!-- sidebar  -->
+    <div class="sidebar-title">
+        Stats
+    </div>
+    <div class="sidebar-block"> 
+        <a href="#" class="badges-link">Total Post : 23</a>
+        <a href="#" class="badges-link">Like : 3</a>
+        <a href="#" class="badges-link">Follower : 3</a>        
+        <a href="#" class="badges-link">Following : 5</a>        
+    </div>
+
+</section>
+{% endblock %}
  
  
