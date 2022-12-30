@@ -39,8 +39,25 @@ def createPost(request):
             form.save_m2m()
             return redirect('my_post')
         else:
-            msg = form.errors 
-    return render(request, 'create-post.html', { 'form':PostForm(), 'msg':msg } )
+            msg = form.errors
+
+    posts = Post.objects.filter(auther=request.user)
+    post_likes = 0
+    for i in posts:
+       post_likes += i.likes.count() 
+    
+    post_count = posts.count()
+    followers = 0
+    following = 0
+    context = { 
+            'form':PostForm(), 
+            'msg':msg,
+            'post_count':post_count,
+            'post_likes':post_likes,
+            'followers': followers,
+            'following': following
+        }
+    return render(request, 'create-post.html', context )
 
 
 # Update a Post
@@ -62,7 +79,26 @@ def updatePost(request, pk):
             return redirect('my_post')
         else:
             msg = form.errors 
-    return render(request, 'create-post.html', { 'form':PostForm(instance=post), 'post':post, 'msg':msg } )
+
+    posts = Post.objects.filter(auther=request.user)
+    post_likes = 0
+    for i in posts:
+       post_likes += i.likes.count() 
+    
+    post_count = posts.count()
+    followers = 0
+    following = 0
+    context = { 
+        'form':PostForm(instance=post), 
+        'post':post, 
+        'msg':msg,
+        'post_count':post_count,
+        'post_likes':post_likes,
+        'followers': followers,
+        'following': following
+    
+    }
+    return render(request, 'create-post.html', context )
 
  
 # Home 
@@ -110,7 +146,25 @@ def deletePost(request, pk):
         post.delete()
         return redirect('my_post')
 
-    return render(request, 'delete-post.html', {'post': post})
+    
+    
+    posts = Post.objects.filter(auther=request.user)
+    post_likes = 0
+    for i in posts:
+       post_likes += i.likes.count() 
+    
+    post_count = posts.count()
+
+    followers = 0
+    following = 0
+    context = {
+        'post': post,
+        'post_count': post_count,
+        'post_likes':post_likes,
+        'followers': followers,
+        'following': following
+    }
+    return render(request, 'delete-post.html', context)
 
 
 
@@ -182,9 +236,17 @@ def BlogPostLike(request, pk):
 @login_required(login_url='/account/login/')
 def myPost(request):
     posts = Post.objects.filter(auther=request.user)
+    post_likes = 0
+    for i in posts:
+       post_likes += i.likes.count() 
+    followers = 0
+    following = 0
     context = {
         'posts':posts,
-        'post_count':posts.count()
+        'post_count':posts.count(),
+        'post_likes':post_likes,
+        'followers': followers,
+        'following': following
     }
     return render(request, 'my-post.html', context)
 
@@ -196,7 +258,7 @@ def likePost(request):
     if request.method=='POST':
         like = request.POST['post_id']
         msg = str(like)+'Getting post id like value'
-        print("##############",msg)
+         
         return
     else:
         return
