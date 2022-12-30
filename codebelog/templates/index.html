@@ -23,7 +23,11 @@
         <div class="blog-right">
             <div class="blog-header">
                 <a href="#">@{{ post.auther.name }} </a>
-                <p>{{ post.created_at | timesince }}</p>
+                <p>
+                    {{ post.created_at | timesince }} | 
+                    <i class="fa-brands fa-teamspeak"></i>
+                    {{ post.view }} 
+                </p>
             </div>
             <hr>
             <div class="blog-body">

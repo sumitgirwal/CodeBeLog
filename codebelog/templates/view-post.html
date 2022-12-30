@@ -12,7 +12,9 @@
     <!-- Post Details -->
     <div class="blog-view-header"> 
         <h1 class="blog-header-title">{{ post.title|title }} </h1>
-        <p> {{ post.updated_at | date }} | Views: {{ post.view }}</p>
+        <p> {{ post.updated_at | date }} |  
+            <i class="fa-brands fa-teamspeak"></i> {{ post.view }}
+        </p>
     </div>
     <hr>
     <div class="blog-view-body">
