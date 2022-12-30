@@ -69,11 +69,15 @@ def dashboard(request):
     post_likes = 0
     for post in posts:
        post_likes += post.likes.count() 
-     
+
+    followers = 0
+    following = 0 
     context = {
         'user':request.user,
         'post_count':post_count,
-        'post_likes':post_likes
+        'post_likes':post_likes,
+        'followers': followers,
+        'following': following
     }
     return render(request, 'dashboard.html', context)
 

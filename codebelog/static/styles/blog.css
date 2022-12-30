@@ -4,10 +4,9 @@
   gap: 16px;
 }
 
-.blog {   
-  /* background-color: white;
-  width: 700px;
-  padding: 10px 10px; */
+.blog-index {   
+  background-color: white;
+  padding: 10px 10px; 
 }
 
 .blog-left {
