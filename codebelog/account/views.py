@@ -62,7 +62,6 @@ def viewUser(request, pk):
 
 
 
-@login_required(login_url='/account/login/')
 def dashboard(request):
     post_count = Post.objects.filter(auther=request.user).count() 
     posts = Post.objects.filter(auther=request.user)

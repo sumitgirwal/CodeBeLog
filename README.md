@@ -1,13 +1,48 @@
 # CodeBeLog
-CodeBeLog webapplication for blogging.
+CodeBeLog web application for blogging.
 
 #### Built with
-- Python
-- Django
+- Python 
+- Django 
 - Html
 - CSS
 
-#### Setup & Run
+#### Installation & Setup
+- Install virtual env
+```bash
+python -m pip install --user virtualenv
+python -m venv venv
+```
+- Activate virtual env
+```bash
+.\venv\Scripts\activate
+```
+- Install packages
+```bash
+pip install -r requirements.txt
+```
+
+- Goto project folder
+```bash
+cd codebelog
+```
+
+- Database migrations
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+- Run application
+```bash
+python manage.py runserver
+```
+- Hit url in browser 
+```bash
+http://127.0.0.1:8000/
+```
+
+#### Quick Cmd
 ```bash
 .\venv\Scripts\activate
 cd codebelog
@@ -15,13 +50,7 @@ python manage.py runserver
 
 http://127.0.0.1:8000/
 
-- run those command
-[Create your own virtual env]
 
-
-- activate virtual env
-
-- install dependency
 pip install -r requirements.txt
 cd codebelog
 python manage.py makemigrations
@@ -85,4 +114,4 @@ Wechat official account feature integrated. Now, you can use wechat official acc
 - [DB Backups](https://coderwall.com/p/mvsoyg/django-dumpdata-and-loaddata)
 - [UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte](https://stackoverflow.com/questions/17843630/python-can-dumpdata-cannot-loaddata-back-unicodedecodeerror)
     Just install notepad++,open file, change encoding to UTF-8 save and run the loaddata commads
-- [Django Fontawesome](https://fontawesome.com/docs/web/use-with/python-django)
+- [Django Fontawesome - Icon](https://fontawesome.com/docs/web/use-with/python-django)
