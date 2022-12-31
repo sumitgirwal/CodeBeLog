@@ -61,6 +61,11 @@
   text-decoration: none;
   font-size: 20px;
   font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.blog-title:hover {
+  color: #276bc4;
 }
 
 .blog-subtitle {
