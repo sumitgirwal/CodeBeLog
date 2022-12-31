@@ -115,3 +115,4 @@ Wechat official account feature integrated. Now, you can use wechat official acc
 - [UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte](https://stackoverflow.com/questions/17843630/python-can-dumpdata-cannot-loaddata-back-unicodedecodeerror)
     Just install notepad++,open file, change encoding to UTF-8 save and run the loaddata commads
 - [Django Fontawesome - Icon](https://fontawesome.com/docs/web/use-with/python-django)
+- [Modal Popup](https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal)

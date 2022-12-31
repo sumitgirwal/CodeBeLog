@@ -47,7 +47,7 @@ class User(AbstractBaseUser):
     
     name = models.CharField(max_length=255)
     
-    photo = models.ImageField(default='user1.jpg')
+    photo = models.ImageField(default='user1.jpg', upload_to='images/')
 
 
     is_active = models.BooleanField(default=True)

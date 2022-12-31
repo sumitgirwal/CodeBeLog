@@ -95,7 +95,7 @@
     </div>
     <div class="badges">
         {% for cat in cats %}
-            <a href="?search={{cat.name}}" class="badges-link">{{ cat.name|title }}</a>
+            <a href="{% url 'home' %}?search={{cat.name}}" class="badges-link">{{ cat.name|title }}</a>
         {% endfor %}
     </div>
 

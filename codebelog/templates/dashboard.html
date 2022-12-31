@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block page_title %} Dashboard {% endblock %}
 
 
@@ -7,10 +8,30 @@
 
 <!-- Profile -->
 <section class="profile-section">
+    {{ msg }}
     <div class="profile">
         <img src="{{ user.photo.url }}" alt="user logo">
         <div class="profile-details">
-            <div class="profile-name">{{ user.name | title}}</div>
+            <div class="profile-name">
+                {{ user.name | title}} 
+                <button id="editProfile" class="profile-edit-btn" onclick="editProfile()" >
+                    <i class="fa-solid fa-pencil" ></i>
+                </button>
+                <div class="profile-edit-modal" id="myModal">
+                    <form class="profile-edit" action="{% url 'dashboard' %}" method="POST" enctype="multipart/form-data">
+                   
+                      {% csrf_token %}
+                      <div>
+                        <span onclick="closeProfile()" class="close">&times;</span>
+                      </div>
+                     {{ form.as_p }}
+                      <div>
+                        <input type="submit" value="Edit Profile" class="save-btn">
+                        <a href="#" onclick="closeProfile()" class="cancel-btn">Cancel</a>
+                      </div>
+                    </form>
+                </div>
+            </div>
             <div class="profile-email">{{ user.email }}</div>
             <div class="profile-stats">
                 <button class="stats-btn">Posts {{ post_count }}</button>
@@ -21,7 +42,45 @@
         </div>
     </div>
 </section>
+
+
+
+<script>
+function editProfile(){
+    var modal = document.getElementById("myModal");
+    modal.style.display = "block";
+}
+
+function closeProfile(){
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+}
+
+// function editProfile(){
+
+//     var modal = document.getElementById("myModal");
+//     var btn = document.getElementById("editProfile");
+//     var spn = document.getElementsByClassName("close")[0];
+
+//     btn.onclick = function() {
+//     modal.style.display = "block";
+//     }
+
+//     spn.onclick = function() {
+//     modal.style.display = "none";
+//     }
+
+//     window.onclick = function(event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     }
+//     }
+// }
+
+
+</script>
 {% endblock %}
+
 
 
 <!-- right page -->
@@ -47,3 +106,4 @@
 
 </section>
 {% endblock %}
+

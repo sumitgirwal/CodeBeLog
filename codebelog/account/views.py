@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from account.models import User
 from blog.models import Post, Category
-from .forms import UserCreationForm
+from .forms import UserCreationForm, UserEditForm
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -69,6 +69,17 @@ def dashboard(request):
     for post in posts:
        post_likes += post.likes.count() 
 
+    msg = ''
+    user = User.objects.get(id=request.user.id)
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, request.FILES, instance=user )
+        if form.is_valid():
+            form.save()
+            msg = 'Successfully profile updated!!'
+        else:
+            msg = form.errors
+            
+    form = UserEditForm(instance=user)
     followers = 0
     following = 0 
     context = {
@@ -76,7 +87,9 @@ def dashboard(request):
         'post_count':post_count,
         'post_likes':post_likes,
         'followers': followers,
-        'following': following
+        'following': following,
+        'msg': msg,
+        'form': form
     }
     return render(request, 'dashboard.html', context)
 
