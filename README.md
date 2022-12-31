@@ -80,7 +80,7 @@ python manage.py loaddata db_backup.json
 - Post Created by user
 - User Profile View
 - Pagination
-- Search articles by title or subtitle
+- Search articles by title or subtitle or category or by username
 - Blog view count
 - Login signup page error and success messages flash
 - Search by category 

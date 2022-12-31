@@ -111,7 +111,8 @@ def index(request):
             (
                 Q(title__icontains=search) |
                 Q(subtitle__icontains=search) |
-                Q(category__name__icontains=search) 
+                Q(category__name__icontains=search) |
+                Q(auther__name__icontains=search) 
             )
             ).order_by('-created_at')
     else:
