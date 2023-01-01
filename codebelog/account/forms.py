@@ -1,6 +1,6 @@
 from django import forms
-
 from .models import User
+
 
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required

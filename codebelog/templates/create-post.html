@@ -25,6 +25,7 @@
             <!-- Create Form -->
             <form class="create-form" action="/create/" method="POST">
                 <h1 class="form-title">Create Blog</h1>
+               
                 <hr>
                 {% csrf_token %}
                 {{ form.as_p }}

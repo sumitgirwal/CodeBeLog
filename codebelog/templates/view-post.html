@@ -19,7 +19,7 @@
     <hr>
     <div class="blog-view-body">
         <div class="blog-subtitle">{{ post.subtitle }}</div>
-        <div class="blog-description"> {{ post.description |  linebreaks  }} </div>
+        <div class="blog-description"> {{ post.description | safe  }} </div>
     </div>
     <hr>
     <div class="blog-view-footer">

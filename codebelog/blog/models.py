@@ -2,7 +2,7 @@ from django.db import models
 from account.models import User
 from datetime import  timezone
 
-
+from tinymce.models import HTMLField
 
 # Blog post status
 STATUS = (
@@ -27,7 +27,7 @@ class Post(models.Model):
     # blog details
     title = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
+    description = HTMLField(blank=True, null=True)
     
     # unique for every title
     slug = models.SlugField(max_length=255, unique=True)

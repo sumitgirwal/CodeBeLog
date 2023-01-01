@@ -1,6 +1,7 @@
 from django.contrib import admin
 from blog.models import Post, Category, Comment
-
+from tinymce.widgets import TinyMCE
+from django.db import models
 
 # Post admin model
 class PostAdminModel(admin.ModelAdmin):
@@ -11,6 +12,8 @@ class PostAdminModel(admin.ModelAdmin):
     ordering = ['id', 'auther' , 'title', 'created_at']
     # auto fill for slug
     prepopulated_fields = {'slug': ('title',)}
+    formfield_overrides = { models.TextField: {'widget': TinyMCE()} }
+
 
 
 admin.site.register(Post, PostAdminModel)

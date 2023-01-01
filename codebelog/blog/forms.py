@@ -1,11 +1,26 @@
 from django import forms
 from .models import Post, Category, Comment
 
+from tinymce.widgets import TinyMCE
+
+class TinyMCEWidget(TinyMCE):
+    def use_required_attribute(self, *args):
+        return False
+
+
 class CustomMMCF(forms.ModelMultipleChoiceField):       
     def label_from_instance(self, category):
         return category.name
 
 class PostForm(forms.ModelForm):
+    
+    # Content field
+    description = forms.CharField(
+        widget=TinyMCEWidget(
+            attrs={'required': False, 'cols': 30, 'rows': 10}
+        )
+    )
+
     category = CustomMMCF(
         queryset=Category.objects.all(),
         widget=forms.CheckboxSelectMultiple
