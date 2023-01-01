@@ -62,7 +62,7 @@
     color: white;
     box-sizing: border-box;
     display: inline-block;
-    transition: all 0.25 ease;
+    transition: all 0.24s ease;
   }
   
   .badges-link:hover {

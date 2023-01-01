@@ -7,6 +7,9 @@ CodeBeLog web application for blogging.
 - Html
 - CSS
 
+![home page](https://user-images.githubusercontent.com/64283478/210176840-96be9f4f-494c-4fca-be54-ac05902fada3.png)
+
+
 #### Installation & Setup
 - Install virtual env
 ```bash
@@ -44,23 +47,18 @@ http://127.0.0.1:8000/
 
 #### Quick Cmd
 ```bash
+
 .\venv\Scripts\activate
 cd codebelog
 python manage.py runserver
 
 http://127.0.0.1:8000/
 
-
 pip install -r requirements.txt
-cd codebelog
+
 python manage.py makemigrations
 python manage.py migrate
 
-- run server
-python manage.py runserver
-
-- hit url
-http://127.0.0.1:8000/
 ```
 
 #### Install dummy data
@@ -73,25 +71,23 @@ python manage.py dumpdata > db_backup.json
 python manage.py loaddata db_backup.json
 ```
 
-#### Features Done
-- Basic setup and core `Hello World!` app
-- Blog post `CRUD` operations
-- User core `signup login logout` using name, email, password & confirm password
-- Post Created by user
-- User Profile View
-- Pagination
-- Search articles by title or subtitle or category or by username
-- Blog view count
-- Login signup page error and success messages flash
-- Search by category 
-- User dashboard 
-- User Post CRUD
-- Comment by user and 
-- Comment approve by admin
-- Like by user and show message if not logged in for comment and likes
-
-
 #### Features
+Basic setup and core `Hello World!` app
+Blog post `crud` operations
+User core `signup login logout` using the name, email, password & confirm password
+Post created by user User profile view
+Post pagination on home page
+Search articles by `title` or `subtitle` or `category` or by `username`
+Blog post `view count`
+Login signup page error and success messages flash
+User dashboard and `view stats`
+Comment by user and `comment` approved by admin
+Like by the user and show a message if not logged in for comment and `likes`
+User `name edit` and upload `profile photo`
+Blog post editor using `TinyMCE` 
+
+
+#### Coming Soon
 Articles, Pages, Categories, Tags(Add, Delete, Edit), etc.
 Articles and pages support Markdown and highlighting.
 Articles support full-text search.
@@ -116,3 +112,4 @@ Wechat official account feature integrated. Now, you can use wechat official acc
     Just install notepad++,open file, change encoding to UTF-8 save and run the loaddata commads
 - [Django Fontawesome - Icon](https://fontawesome.com/docs/web/use-with/python-django)
 - [Modal Popup](https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal)
+- [TinyMCE](https://pypi.org/project/django-tinymce/)
