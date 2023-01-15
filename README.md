@@ -72,19 +72,19 @@ python manage.py loaddata db_backup.json
 ```
 
 #### Features
-Basic setup and core `Hello World!` app
-Blog post `crud` operations
-User core `signup login logout` using the name, email, password & confirm password
-Post created by user User profile view
-Post pagination on home page
-Search articles by `title` or `subtitle` or `category` or by `username`
-Blog post `view count`
-Login signup page error and success messages flash
-User dashboard and `view stats`
-Comment by user and `comment` approved by admin
-Like by the user and show a message if not logged in for comment and `likes`
-User `name edit` and upload `profile photo`
-Blog post editor using `TinyMCE` 
+Basic setup and core `Hello World!` app <br/>
+Blog post `crud` operations <br/>
+User core `signup login logout` using the name, email, password & confirm password <br/>
+Post created by user User profile view <br/>
+Post pagination on home page <br/>
+Search articles by `title` or `subtitle` or `category` or by `username` <br/>
+Blog post `view count` <br/>
+Login signup page error and success messages flash <br/>
+User dashboard and `view stats` <br/>
+Comment by user and `comment` approved by admin <br/>
+Like by the user and show a message if not logged in for comment and `likes` <br/>
+User `name edit` and upload `profile photo` <br/>
+Blog post editor using `TinyMCE` <br/>
 
 
 #### Coming Soon
