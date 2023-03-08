@@ -1,5 +1,19 @@
 # CodeBeLog
 CodeBeLog web application for blogging.
+A blog web application built with Django and Bootstrap can be a powerful tool for sharing ideas and information with the world. 
+Here are some key features that you may have included in your project:
+
+User authentication: Your blog web application likely allows users to sign up and log in to the application to create, edit, and publish their own blog posts. You may have used Django's built-in authentication system to handle user registration and login.
+
+Blog post creation and editing: Your application may allow users to create new blog posts and edit existing ones. You may have used Django's form handling and database models to create and store blog post content.
+
+Blog post display: Your application likely displays blog posts to users in a visually appealing and user-friendly way. You may have used Bootstrap's CSS and JavaScript to style and add interactivity to your blog post pages.
+
+Search functionality: Your application may allow users to search for blog posts based on keywords or tags, making it easier for them to find content that interests them.
+
+Admin dashboard: As the owner or administrator of the blog web application, you likely have access to a backend dashboard where you can manage blog posts, user accounts, and other aspects of the application.
+
+Overall, a blog web application built with Django and Bootstrap can be a powerful tool for sharing ideas and engaging with a community of readers. With the right features and design, your blog can become a valuable resource for people looking for information on a wide range of topics.
 
 #### Built with
 - Python 
